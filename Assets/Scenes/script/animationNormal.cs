@@ -13,6 +13,7 @@ public class animationNormal : MonoBehaviour {
     {
         public string Name;
         public KeyCode key;
+        public bool enable;
         public bool lockwhenPlay;
         public int lockPlayTimes;
         public Texture2D[] normalMaps;
@@ -20,6 +21,7 @@ public class animationNormal : MonoBehaviour {
         public Sprite[] Bleedingsprites;
     };
 
+    private animates NULL;
     public animates[] Animations;
 
     // kind of animation
@@ -32,6 +34,17 @@ public class animationNormal : MonoBehaviour {
     public int RemainLockPlayTime = 0;
     private bool AnyBtnDown = true;
 
+    public void setAnimationEnableByName(string name,bool enable) {
+
+        for (int i = 0; i < Animations.Length; i++) {
+            if (Animations[i].Name == name)
+            {
+                Animations[i].enable = enable;
+                return;
+            }
+        }
+        Debug.Log(name + " is not found!");
+    }
     // Use this for initialization
     void Start()
     {
@@ -45,6 +58,8 @@ public class animationNormal : MonoBehaviour {
         if (RemainLockPlayTime == 0) {
             for (int i = 0; i < Animations.Length; i++)
             {
+                if (Animations[i].enable == false) continue;
+
                 AnyBtnDown = true;
                 if (Input.GetKey(Animations[i].key))
                 {

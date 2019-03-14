@@ -31,20 +31,36 @@ public class animalMove : MonoBehaviour {
         {
             moveHorizontal = 1;
             moveVertical = 0;
+            GetComponent<animationNormal>().setAnimationEnableByName("nodright", true);
+            GetComponent<animationNormal>().setAnimationEnableByName("nodleft", false);
+            GetComponent<animationNormal>().setAnimationEnableByName("nodback", false);
+            GetComponent<animationNormal>().setAnimationEnableByName("nodfront", false);
         }
         else if (Input.GetKey(KeyCode.LeftArrow)) {
             moveHorizontal = -1;
             moveVertical = 0;
+            GetComponent<animationNormal>().setAnimationEnableByName("nodleft", true);
+            GetComponent<animationNormal>().setAnimationEnableByName("nodright", false);
+            GetComponent<animationNormal>().setAnimationEnableByName("nodback", false);
+            GetComponent<animationNormal>().setAnimationEnableByName("nodfront", false);
         }
         else if (Input.GetKey(KeyCode.UpArrow))
         {
             moveHorizontal = 0;
             moveVertical = 1;
+            GetComponent<animationNormal>().setAnimationEnableByName("nodback", true);
+            GetComponent<animationNormal>().setAnimationEnableByName("nodright", false);
+            GetComponent<animationNormal>().setAnimationEnableByName("nodleft", false);
+            GetComponent<animationNormal>().setAnimationEnableByName("nodfront", false);
         }
         else if (Input.GetKey(KeyCode.DownArrow))
         {
             moveHorizontal = 0;
             moveVertical = -1;
+            GetComponent<animationNormal>().setAnimationEnableByName("nodfront", true);
+            GetComponent<animationNormal>().setAnimationEnableByName("nodright", false);
+            GetComponent<animationNormal>().setAnimationEnableByName("nodleft", false);
+            GetComponent<animationNormal>().setAnimationEnableByName("nodback", false);
         }
         else
         {
@@ -62,4 +78,6 @@ public class animalMove : MonoBehaviour {
         rb2d.velocity=movement * speed;
 
     }
+    
+
 }

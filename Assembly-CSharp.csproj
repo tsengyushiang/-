@@ -51,14 +51,16 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+     <Compile Include="Assets\Scenes\script\actionReact.cs" />
      <Compile Include="Assets\Scenes\script\animalMove.cs" />
      <Compile Include="Assets\Scenes\script\animationNormal.cs" />
+     <Compile Include="Assets\Scenes\script\hintWords.cs" />
      <Compile Include="Assets\Scenes\script\TextSpacing.cs" />
- <Reference Include="Unity.PackageManagerUI.Editor">
- <HintPath>C:/Users/yushiang/Desktop/GameProject/Library/ScriptAssemblies/Unity.PackageManagerUI.Editor.dll</HintPath>
- </Reference>
  <Reference Include="UnityEditor.StandardEvents">
  <HintPath>C:/Users/yushiang/Desktop/GameProject/Library/ScriptAssemblies/UnityEditor.StandardEvents.dll</HintPath>
+ </Reference>
+ <Reference Include="Unity.PackageManagerUI.Editor">
+ <HintPath>C:/Users/yushiang/Desktop/GameProject/Library/ScriptAssemblies/Unity.PackageManagerUI.Editor.dll</HintPath>
  </Reference>
  <Reference Include="UnityEngine.AIModule">
  <HintPath>C:/Program Files/Unity/Editor/Data/Managed/UnityEngine/UnityEngine.AIModule.dll</HintPath>

@@ -90,9 +90,11 @@ public class animationNormal : MonoBehaviour {
             material.SetTexture("_BumpMap", Animations[currentState].normalMaps[(int)currentMotion]);
 
             Destroy(GetComponent<PolygonCollider2D>());
+     
             gameObject.AddComponent<PolygonCollider2D>();
+            GetComponent<PolygonCollider2D>().isTrigger = true;
 
-            currentMotion += speed;
+            currentMotion += speed*Time.deltaTime;
             if ((int)currentMotion >= Animations[currentState].Normalsprites.Length)
             {
                 currentMotion = 0;

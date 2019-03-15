@@ -9,8 +9,22 @@ public class actionReact : MonoBehaviour {
     public Text htintText;
 
     void Awake() {
-        sentenceText.text = "無聊的時候可以點點頭，世界就會上下移動";
-        htintText.text = "按Q點頭";
+        setSentence("無聊的時候可以點點頭，世界就會上下移動", "按Q點頭");
+    }
+
+    void setSentence(string left,string right) {
+
+        int count = 0;
+        for (int i = 0; i < left.Length; i++) {
+            count++;
+            if (count >10) {
+                count = 0;
+                left = left.Substring(0, i) +"\n"+left.Substring(i);
+            }
+        }
+        
+        sentenceText.text = left;
+        htintText.text = right;
     }
 
     void OnTriggerEnter2D(Collider2D collision)
@@ -19,8 +33,7 @@ public class actionReact : MonoBehaviour {
 
         if (tmp != null)
         {
-            sentenceText.text = tmp.sentence;
-            htintText.text = tmp.hint;
+            setSentence(tmp.sentence, tmp.hint);
             transform.parent.GetComponent<animationNormal>().setAnimationEnableByName(tmp.activeName, true);
         }
     }
@@ -30,8 +43,7 @@ public class actionReact : MonoBehaviour {
         hintWords tmp = collision.gameObject.GetComponent<hintWords>();
         if (tmp != null)
         {
-            sentenceText.text = "";
-            htintText.text = "";
+            setSentence("", "");
             transform.parent.GetComponent<animationNormal>().setAnimationEnableByName(tmp.activeName, false);
         }
     }

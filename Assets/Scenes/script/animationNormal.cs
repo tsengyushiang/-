@@ -43,7 +43,6 @@ public class animationNormal : MonoBehaviour {
                 return;
             }
         }
-        Debug.Log(name + " is not found!");
     }
     // Use this for initialization
     void Start()

@@ -27,7 +27,7 @@ public class actionReact : MonoBehaviour {
         htintText.text = right;
     }
 
-    void OnTriggerEnter2D(Collider2D collision)
+    void OnTriggerStay2D(Collider2D collision)
     {
         hintWords tmp = collision.gameObject.GetComponent<hintWords>();
 

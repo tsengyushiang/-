@@ -23,7 +23,7 @@ public class zindexChange : MonoBehaviour {
     void OnTriggerExit2D(Collider2D collision)
     {
         if (collision.gameObject.name == "characterCollider") {
-            Debug.Log("Exit" + collision.gameObject.name);
+
             transform.parent.GetComponent<SpriteRenderer>().sortingOrder = 1;
             transform.parent.GetChild(0).GetComponent<BoxCollider2D>().enabled = false;
             transform.parent.GetChild(1).GetComponent<BoxCollider2D>().enabled = true;

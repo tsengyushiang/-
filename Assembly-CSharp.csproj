@@ -56,6 +56,7 @@
      <Compile Include="Assets\Scenes\script\animationNormal.cs" />
      <Compile Include="Assets\Scenes\script\hintWords.cs" />
      <Compile Include="Assets\Scenes\script\TextSpacing.cs" />
+     <Compile Include="Assets\Scenes\script\timer.cs" />
      <Compile Include="Assets\Scenes\script\zindexChange.cs" />
      <Compile Include="Assets\UTJ\FrameCapturer\Scripts\AudioRecorder.cs" />
      <Compile Include="Assets\UTJ\FrameCapturer\Scripts\Encoder\AudioEncoder.cs" />
@@ -75,7 +76,6 @@
      <Compile Include="Assets\UTJ\FrameCapturer\Scripts\Misc\DataPath.cs" />
      <Compile Include="Assets\UTJ\FrameCapturer\Scripts\MovieRecorder.cs" />
      <Compile Include="Assets\UTJ\FrameCapturer\Scripts\RecorderBase.cs" />
-     <Compile Include="Assets\zindexChange.cs" />
      <None Include="Assets\StreamingAssets\UTJ\FrameCapturer\License.txt" />
      <None Include="Assets\UTJ\FrameCapturer\Shaders\CopyFrameBuffer.shader" />
  <Reference Include="UnityEditor.StandardEvents">

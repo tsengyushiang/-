@@ -17,7 +17,6 @@ public class timer : MonoBehaviour {
 
         if (currentTime == TotalTime)
         {
-            timerSlider.value = 0;
             CancelInvoke();
         }
         else if (currentTime == TotalTime*0.6) {

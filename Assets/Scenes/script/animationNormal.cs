@@ -27,12 +27,13 @@ public class animationNormal : MonoBehaviour {
     // kind of animation
     private int currentState=0;
     // which sprite
-    private float currentMotion=0;
+    public float currentMotion=0;
     public float speed=0.05f;
 
     private bool Isbleeding = false;
     public int RemainLockPlayTime = 0;
     private bool AnyBtnDown = true;
+    public string CurrentAnimationName = "";   
 
     public void setAnimationEnableByName(string name,bool enable) {
 
@@ -80,8 +81,9 @@ public class animationNormal : MonoBehaviour {
 
         if (AnyBtnDown == true)
         {
+            CurrentAnimationName = Animations[currentState].Name;
 
-            if(Isbleeding==true)
+            if (Isbleeding==true)
                 GetComponent<SpriteRenderer>().sprite = Animations[currentState].Bleedingsprites[(int)currentMotion];
             else
                 GetComponent<SpriteRenderer>().sprite = Animations[currentState].Normalsprites[(int)currentMotion];

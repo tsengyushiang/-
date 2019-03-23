@@ -55,6 +55,7 @@
      <Compile Include="Assets\Scenes\script\animalMove.cs" />
      <Compile Include="Assets\Scenes\script\animationNormal.cs" />
      <Compile Include="Assets\Scenes\script\hintWords.cs" />
+     <Compile Include="Assets\Scenes\script\PathAndActionRecorder.cs" />
      <Compile Include="Assets\Scenes\script\TextSpacing.cs" />
      <Compile Include="Assets\Scenes\script\timer.cs" />
      <Compile Include="Assets\Scenes\script\zindexChange.cs" />

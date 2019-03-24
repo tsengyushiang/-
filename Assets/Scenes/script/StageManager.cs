@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class StageManager : MonoBehaviour {
 
-    private int currentStage =1;
+    private int currentStage =2;
     public GameObject[] stages;
     public PathAndActionRecorder recorder;
 
@@ -39,14 +39,15 @@ public class StageManager : MonoBehaviour {
         }
 
 
-        if (i == 1)
+        if (i == 2)
         {
             recorder.Stop();
             recorder.StartRecord();
         }
-        else if (i == 2)
+        else if (i == 3)
         {
             recorder.Stop();
+            recorder.save();
             recorder.StartReplay();
         }
 

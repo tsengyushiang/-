@@ -5,7 +5,10 @@ using System.IO;  //StreamWrite會用到
 
 public class PathAndActionRecorder : MonoBehaviour {
 
-    public float RecordRate=1.0f;
+    public float RecordRate = 1.0f;
+    public float ReplayRate = 1.0f;
+    public GameObject RecordObj;
+    public GameObject ReplayObj;
 
     [System.Serializable]
     public class status
@@ -20,45 +23,59 @@ public class PathAndActionRecorder : MonoBehaviour {
         public int index;
     };
 
-    public ArrayList Records=new ArrayList();
+    private List<status> Records = new List<status>();
 
-    void TimerCountDown()
+    void Record()
     {
-        Records.Add(new status(transform.position,
-            GetComponent<animationNormal>().CurrentAnimationName,
-            (int)GetComponent<animationNormal>().currentMotion
+        Records.Add(new status(RecordObj.transform.position,
+            RecordObj.GetComponent<animationNormal>().CurrentAnimationName,
+            (int)RecordObj.GetComponent<animationNormal>().currentMotion
             ));
     }
-    // Start is called before the first frame update
-    public void OnEnable()
-    {
-        InvokeRepeating("TimerCountDown", 0f, RecordRate);
+
+    void Replay() {
+
+        ReplayObj.GetComponent<setSprite>().setAction(
+            Records[0].pos, Records[0].currentAnimation, Records[0].index);
+
+        Records.RemoveAt(0);
+        if (Records.ToArray().Length == 0)
+            CancelInvoke();
     }
 
-    void save(string fileName, ArrayList data)
+    // Start is called before the first frame update
+    public void StartRecord()
     {
+        Records.Clear();
+        InvokeRepeating("Record", 0f, RecordRate);
+    }
+
+    public void StartReplay() {
+        InvokeRepeating("Replay", 0f, ReplayRate);
+    }
+
+    public void Stop() {
+        if (Records.ToArray().Length != 0)
+        {
+            save(Records);
+        }
+        CancelInvoke();
+    }
+    
+    void save(List<status> data)
+    {
+        object[] files = Resources.LoadAll("records");
+        // Debug.Log(JsonUtility.FromJson<status>(files[files.Length-1].ToString()).pos);
+
         string saveString = "";
         foreach (status s in data) {
             saveString += JsonUtility.ToJson(s)+"\n";
         }
 
-        Debug.Log("save : "+saveString);
-
         //將字串saveString存到硬碟中
-        StreamWriter file = new StreamWriter("Assets/Resources/records/"+fileName+".json");
+        StreamWriter file = new StreamWriter("Assets/Resources/records/"+ (files.Length + 1).ToString() + ".json");
         file.Write(saveString);
         file.Close();
-    }
-
-    public void OnDisable() {
-
-        
-        object[] files = Resources.LoadAll("records");
-        save((files.Length + 1).ToString(), Records);
-
-        // Debug.Log(JsonUtility.FromJson<status>(files[files.Length-1].ToString()).pos);
-
-        CancelInvoke();
     }
 
 }

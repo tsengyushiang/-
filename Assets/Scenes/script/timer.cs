@@ -7,6 +7,7 @@ using UnityEngine.UI;
 public class timer : MonoBehaviour {
 
     public Scrollbar timerSlider;
+    public StageManager stage;
     public int TotalTime = 60;
     private int currentTime = 0;
 
@@ -17,6 +18,7 @@ public class timer : MonoBehaviour {
 
         if (currentTime == TotalTime)
         {
+            stage.Next();
             CancelInvoke();
         }
         else if (currentTime == TotalTime*0.6) {

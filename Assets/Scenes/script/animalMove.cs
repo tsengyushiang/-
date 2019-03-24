@@ -6,12 +6,11 @@ public class animalMove : MonoBehaviour {
 
     public float speed;             //Floating point variable to store the player's movement speed.
 
-    private Rigidbody2D rb2d;       //Store a reference to the Rigidbody2D component required to use 2D Physics.
+    private Rigidbody2D rb2d;       //Store a reference to the Rigidbody2D component required to use 2D Physics.    
 
     float moveHorizontal = 0;
     float moveVertical = 0;
-    
-    // Use this for initialization
+
     void Start()
     {
         //Get and store a reference to the Rigidbody2D component so that we can access it.

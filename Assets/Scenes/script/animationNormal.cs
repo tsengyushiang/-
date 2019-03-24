@@ -23,6 +23,7 @@ public class animationNormal : MonoBehaviour {
 
     private animates NULL;
     public animates[] Animations;
+    public GameObject foodPot;
 
     // kind of animation
     private int currentState=0;
@@ -33,7 +34,9 @@ public class animationNormal : MonoBehaviour {
     private bool Isbleeding = false;
     public int RemainLockPlayTime = 0;
     private bool AnyBtnDown = true;
-    public string CurrentAnimationName = "";   
+    public string CurrentAnimationName = "";
+
+    private int backichyCount = 0; 
 
     public void setAnimationEnableByName(string name,bool enable) {
 
@@ -72,6 +75,9 @@ public class animationNormal : MonoBehaviour {
                     {
                         RemainLockPlayTime = Animations[i].lockPlayTimes;
                     }
+
+                    
+
                     break;
                 }
                 AnyBtnDown = false;
@@ -80,8 +86,29 @@ public class animationNormal : MonoBehaviour {
         
 
         if (AnyBtnDown == true)
-        {
+        { 
             CurrentAnimationName = Animations[currentState].Name;
+
+            if (CurrentAnimationName == "backichy" && currentMotion == 0.0f)
+            {
+                backichyCount++;
+                if (backichyCount == 5)
+                {
+                    hintWords.changeState("backichy", "阿...搓太多次流血了", "按C搓背", "backichy");
+                    Isbleeding = true;
+                }
+                else if (backichyCount == 6)
+                {
+                    hintWords.changeState("backichy", "雖然痛痛的還是很舒服", "按C搓背", "backichy");
+                }
+            }
+            else if (CurrentAnimationName == "eat" && currentMotion == 0.0f)
+            {
+                foodPot.GetComponent<SpriteRenderer>().enabled = true;
+                foodPot.transform.GetChild(0).gameObject.SetActive(false);
+                Animations[currentState].enable = false;
+                hintWords.changeState("eat", "在吃一次剛剛的東西好了", "按X吐出來", "throwup");
+            }
 
             if (Isbleeding==true)
                 GetComponent<SpriteRenderer>().sprite = Animations[currentState].Bleedingsprites[(int)currentMotion];

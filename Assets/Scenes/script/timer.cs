@@ -10,6 +10,8 @@ public class timer : MonoBehaviour {
     public StageManager stage;
     public int TotalTime = 60;
     private int currentTime = 0;
+    public GameObject foodPot;
+
 
     void TimerCountDown()
     {
@@ -25,7 +27,10 @@ public class timer : MonoBehaviour {
         {
             GetComponent<Animator>().Play("keeper");
         }
-        else if (currentTime == TotalTime * 0.5 + 5) {
+        else if (currentTime == TotalTime * 0.5 + 7) {
+
+            foodPot.GetComponent<SpriteRenderer>().enabled = false;
+            foodPot.transform.GetChild(0).gameObject.SetActive(true);
             hintWords.changeState("lickleft", "等等管理員來熄燈後，我的一天就結束了", "按Z舔欄杆", "lickleft");
             hintWords.changeState("noFoodPot", "跟昨天一樣的食物", "按Space吃東西", "eat");
 

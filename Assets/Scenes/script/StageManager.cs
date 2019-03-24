@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class StageManager : MonoBehaviour {
 
-    private int currentStage =2;
+    private int currentStage =0;
     public GameObject[] stages;
     public PathAndActionRecorder recorder;
 

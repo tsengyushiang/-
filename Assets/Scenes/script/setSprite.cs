@@ -16,7 +16,7 @@ public class setSprite : MonoBehaviour {
 
     public void setAction(Vector3 pos,string actionName,int index) {
 
-        transform.position = (pos*0.83f+new Vector3(-0.6f,-0.5f,0));
+        transform.position = pos+new Vector3(-0.7f,-0.67f,0);
 
         foreach (animates a in animations) {
             if (a.Name == actionName)

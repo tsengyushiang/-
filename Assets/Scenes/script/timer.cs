@@ -21,15 +21,20 @@ public class timer : MonoBehaviour {
             stage.Next();
             CancelInvoke();
         }
-        else if (currentTime == TotalTime*0.6) {
-
+        else if (currentTime == TotalTime * 0.5)
+        {
+            GetComponent<Animator>().Play("keeper");
+        }
+        else if (currentTime == TotalTime * 0.5 + 5) {
             hintWords.changeState("lickleft", "等等管理員來熄燈後，我的一天就結束了", "按Z舔欄杆", "lickleft");
             hintWords.changeState("noFoodPot", "跟昨天一樣的食物", "按Space吃東西", "eat");
+
         }
     }
     // Start is called before the first frame update
     public void OnEnable()
     {
+        timerSlider.value = 1;
         currentTime = 0;
         InvokeRepeating("TimerCountDown", 1f, 1f);
     }

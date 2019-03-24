@@ -6,7 +6,7 @@ using System.IO;  //StreamWrite會用到
 public class PathAndActionRecorder : MonoBehaviour {
 
     public float RecordRate = 1.0f;
-    public float ReplayRate = 1.0f;
+    public float ReplayTime = 10f;
     public GameObject RecordObj;
     public GameObject ReplayObj;
     private int replayIndex = 0;
@@ -53,7 +53,7 @@ public class PathAndActionRecorder : MonoBehaviour {
     }
 
     public void StartReplay() {
-        InvokeRepeating("Replay", 0f, ReplayRate);
+        InvokeRepeating("Replay", 0f, (float)ReplayTime / Records.Count);
     }
 
     public void Stop() {        

@@ -31,10 +31,13 @@ public class timer : MonoBehaviour {
 
         }
     }
+
+    void Awake() {
+        timerSlider.value = 0;
+    }
     // Start is called before the first frame update
     public void OnEnable()
-    {
-        timerSlider.value = 1;
+    {      
         currentTime = 0;
         InvokeRepeating("TimerCountDown", 1f, 1f);
     }

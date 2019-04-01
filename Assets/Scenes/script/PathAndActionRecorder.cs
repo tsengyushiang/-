@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using System.IO;  //StreamWrite會用到
+using UnityEditor;
 
 public class PathAndActionRecorder : MonoBehaviour {
 
@@ -10,6 +11,15 @@ public class PathAndActionRecorder : MonoBehaviour {
     public GameObject RecordObj;
     public GameObject ReplayObj;
     private int replayIndex = 0;
+    public int DayCount=0;
+
+
+    void Start() {
+
+        DirectoryInfo directoryInfo = new DirectoryInfo(Application.streamingAssetsPath);
+        FileInfo[] allFiles = directoryInfo.GetFiles("*.json");
+        DayCount = allFiles.Length + 1;
+    }
 
     [System.Serializable]
     public class status
@@ -59,25 +69,19 @@ public class PathAndActionRecorder : MonoBehaviour {
     public void Stop() {        
         CancelInvoke();
     }
-
+   
     public void save()
-    {
-        object[] files = Resources.LoadAll("records");
-        // Debug.Log(JsonUtility.FromJson<status>(files[files.Length-1].ToString()).pos);
-
+    {      
         string saveString = "";
         foreach (status s in Records) {
             saveString += JsonUtility.ToJson(s) + "\n";
         }
 
-        //將字串saveString存到硬碟中
-        StreamWriter file = new StreamWriter("Assets/Resources/records/" + (files.Length + 1).ToString() + ".json");
-        file.Write(saveString);
-        file.Close();
+        System.IO.File.WriteAllText(Application.streamingAssetsPath +"/"+ (DayCount).ToString() + ".json",saveString);
     }
 
     void Awake() {
-       Load();
+       
     }
 
     void Load() {

@@ -23,7 +23,7 @@ public class actionReact : MonoBehaviour {
             }
         }
         
-        sentenceText.text = left;
+        sentenceText.text = "";
         htintText.text = right;
     }
 

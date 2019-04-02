@@ -57,6 +57,7 @@
      <Compile Include="Assets\Scenes\script\hintWords.cs" />
      <Compile Include="Assets\Scenes\script\PathAndActionRecorder.cs" />
      <Compile Include="Assets\Scenes\script\practiceScene.cs" />
+     <Compile Include="Assets\Scenes\script\ReplayScene.cs" />
      <Compile Include="Assets\Scenes\script\setSprite.cs" />
      <Compile Include="Assets\Scenes\script\StageManager.cs" />
      <Compile Include="Assets\Scenes\script\StartMenuContorl.cs" />

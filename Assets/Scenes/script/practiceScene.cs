@@ -5,10 +5,22 @@ using UnityEngine;
 public class practiceScene : MonoBehaviour {
 
     public StageManager stage;
+    public GameObject startMenu;
     private bool isActive=true;
 
-    void Start()
-    {
+    public void ShowFirst() {
+        startMenu.SetActive(true);
+        startMenu.GetComponent<StartMenuContorl>().enabled = false;
+        isActive = false;
+    }
+
+    public void animateOver() {
+        startMenu.SetActive(false);
+       
+    }
+
+    public void ableToGo() {
+        isActive = true;
     }
 
     void Update() {
@@ -19,7 +31,7 @@ public class practiceScene : MonoBehaviour {
             Input.GetKeyDown(KeyCode.D)) && isActive)
         {
             isActive = false;
-            transform.GetChild(0).gameObject.SetActive(false);
+            transform.GetChild(1).gameObject.SetActive(false);
             StartCoroutine(Example());
         }
 

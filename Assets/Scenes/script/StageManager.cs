@@ -2,9 +2,10 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+
 public class StageManager : MonoBehaviour {
 
-    private int currentStage =0;
+    public int currentStage =0;
     public GameObject[] stages;
     public PathAndActionRecorder recorder;
 
@@ -23,7 +24,7 @@ public class StageManager : MonoBehaviour {
 
     }
 
-    private void setStage(int i) {
+    public void setStage(int i) {
 
 
         for (int index = 0; index < stages.Length; index++) {
@@ -38,7 +39,9 @@ public class StageManager : MonoBehaviour {
 
         }
 
-
+        if (i == 1) {
+           stages[i].GetComponent<Animator>().Play("fadeIn");
+        }
         if (i == 2)
         {
             recorder.Stop();

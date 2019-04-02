@@ -23,6 +23,7 @@ public class timer : MonoBehaviour {
             stage.Next();
             CancelInvoke();
         }
+        /*
         else if (currentTime == TotalTime * 0.5)
         {
             GetComponent<Animator>().Play("keeper");
@@ -35,6 +36,7 @@ public class timer : MonoBehaviour {
             hintWords.changeState("noFoodPot", "跟昨天一樣的食物", "按Space吃東西", "eat");
 
         }
+        */
     }
 
     void Awake() {

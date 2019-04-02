@@ -59,6 +59,7 @@
      <Compile Include="Assets\Scenes\script\practiceScene.cs" />
      <Compile Include="Assets\Scenes\script\setSprite.cs" />
      <Compile Include="Assets\Scenes\script\StageManager.cs" />
+     <Compile Include="Assets\Scenes\script\StartMenuContorl.cs" />
      <Compile Include="Assets\Scenes\script\TextSpacing.cs" />
      <Compile Include="Assets\Scenes\script\timer.cs" />
      <Compile Include="Assets\Scenes\script\zindexChange.cs" />

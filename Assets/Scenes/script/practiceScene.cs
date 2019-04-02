@@ -13,7 +13,10 @@ public class practiceScene : MonoBehaviour {
 
     void Update() {
 
-        if (Input.anyKey && isActive)
+        if ((Input.GetKeyDown(KeyCode.W)|| 
+            Input.GetKeyDown(KeyCode.S)||
+            Input.GetKeyDown(KeyCode.A)||
+            Input.GetKeyDown(KeyCode.D)) && isActive)
         {
             isActive = false;
             transform.GetChild(0).gameObject.SetActive(false);

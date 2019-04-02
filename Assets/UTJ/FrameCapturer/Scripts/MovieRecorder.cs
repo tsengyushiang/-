@@ -119,8 +119,7 @@ namespace UTJ.FrameCapturer
                 {
                     targetFramerate = m_targetFramerate;
                 }
-                string outPath = m_outputDir.GetFullPath() + "/" +
-                    GameObject.Find("PathActionRecord").GetComponent<PathAndActionRecorder>().DayCount.ToString();
+                string outPath = m_outputDir.GetFullPath() + "/" + PathAndActionRecorder.DayCount.ToString();
 
                 m_encoderConfigs.captureVideo = m_captureVideo;
                 m_encoderConfigs.captureAudio = m_captureAudio;
@@ -184,7 +183,7 @@ namespace UTJ.FrameCapturer
             {
                 UploadFile(
                     Application.dataPath + "/StreamingAssets/" +
-                    GameObject.Find("PathActionRecord").GetComponent<PathAndActionRecorder>().DayCount.ToString() + ".gif",
+                    PathAndActionRecorder.DayCount.ToString() + ".gif",
                     "http://localhost/");
                 Debug.Log("MovieRecorder: EndRecording()");
             }
@@ -210,7 +209,7 @@ namespace UTJ.FrameCapturer
             postForm.AddBinaryData(
                 "theFile",
                 localFile.bytes,
-                GameObject.Find("PathActionRecord").GetComponent<PathAndActionRecorder>().DayCount.ToString() + ".gif",
+                PathAndActionRecorder.DayCount.ToString() + ".gif",
                 "text/plain");
 
             WWW upload = new WWW(uploadURL, postForm);

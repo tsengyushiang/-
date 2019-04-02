@@ -26,7 +26,7 @@ public class animalMove : MonoBehaviour {
             return;
         }
 
-        if (Input.GetKey(KeyCode.RightArrow))
+        if (Input.GetKey(KeyCode.D))
         {
             moveHorizontal = 1;
             moveVertical = 0;
@@ -35,7 +35,7 @@ public class animalMove : MonoBehaviour {
             GetComponent<animationNormal>().setAnimationEnableByName("nodback", false);
             GetComponent<animationNormal>().setAnimationEnableByName("nodfront", false);
         }
-        else if (Input.GetKey(KeyCode.LeftArrow)) {
+        else if (Input.GetKey(KeyCode.A)) {
             moveHorizontal = -1;
             moveVertical = 0;
             GetComponent<animationNormal>().setAnimationEnableByName("nodleft", true);
@@ -43,7 +43,7 @@ public class animalMove : MonoBehaviour {
             GetComponent<animationNormal>().setAnimationEnableByName("nodback", false);
             GetComponent<animationNormal>().setAnimationEnableByName("nodfront", false);
         }
-        else if (Input.GetKey(KeyCode.UpArrow))
+        else if (Input.GetKey(KeyCode.W))
         {
             moveHorizontal = 0;
             moveVertical = 1;
@@ -52,7 +52,7 @@ public class animalMove : MonoBehaviour {
             GetComponent<animationNormal>().setAnimationEnableByName("nodleft", false);
             GetComponent<animationNormal>().setAnimationEnableByName("nodfront", false);
         }
-        else if (Input.GetKey(KeyCode.DownArrow))
+        else if (Input.GetKey(KeyCode.S))
         {
             moveHorizontal = 0;
             moveVertical = -1;

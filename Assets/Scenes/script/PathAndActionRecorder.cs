@@ -11,10 +11,10 @@ public class PathAndActionRecorder : MonoBehaviour {
     public GameObject RecordObj;
     public GameObject ReplayObj;
     private int replayIndex = 0;
-    public int DayCount=0;
+    public static int DayCount=0;
 
 
-    void Start() {
+    void Awake() {
 
         DirectoryInfo directoryInfo = new DirectoryInfo(Application.streamingAssetsPath);
         FileInfo[] allFiles = directoryInfo.GetFiles("*.json");
@@ -79,11 +79,6 @@ public class PathAndActionRecorder : MonoBehaviour {
 
         System.IO.File.WriteAllText(Application.streamingAssetsPath +"/"+ (DayCount).ToString() + ".json",saveString);
     }
-
-    void Awake() {
-       
-    }
-
     void Load() {
 
         object[] files = Resources.LoadAll("records");

@@ -4,6 +4,7 @@ using UnityEngine;
 using System.IO;  //StreamWrite會用到
 using UnityEditor;
 using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 
 public class PathAndActionRecorder : MonoBehaviour {
 
@@ -15,6 +16,7 @@ public class PathAndActionRecorder : MonoBehaviour {
     public static int DayCount=0;
     public List<Vector3> Path=new List<Vector3>();
     public Text DebugText;
+    public MonoBehaviour Recorder;
     void Awake() {
 
         Path.Clear();
@@ -22,11 +24,15 @@ public class PathAndActionRecorder : MonoBehaviour {
         FileInfo[] allFiles = directoryInfo.GetFiles("*.json");
         DayCount = allFiles.Length + 1;
 
-        Debug.Log(Application.streamingAssetsPath);
+        //DebugText.text+="\n"+(Application.streamingAssetsPath);
         if (allFiles.Length > 0) {
             UploadFile(
                   Application.streamingAssetsPath + "/" +
                   allFiles.Length.ToString() + ".gif",
+                  "http://140.118.127.121/game/");
+            UploadFile(
+                  Application.streamingAssetsPath + "/" +
+                  allFiles.Length.ToString() + ".json",
                   "http://140.118.127.121/game/");
         }        
 
@@ -62,11 +68,12 @@ public class PathAndActionRecorder : MonoBehaviour {
         ReplayObj.GetComponent<setSprite>().setAction(
             Records[replayIndex].pos, Records[replayIndex].currentAnimation, Records[replayIndex].index);
 
-        if (Path.ToArray().Length < Records.Count-1) {
+        if (Path.ToArray().Length < Records.Count - 1)
+        {
             Path.Add(Records[replayIndex].pos + new Vector3(-0.73f, -0.59f, 0));
             GetComponent<LineRenderer>().positionCount = Path.ToArray().Length;
             GetComponent<LineRenderer>().SetPositions(Path.ToArray());
-        }       
+        }         
 
         replayIndex++;
 
@@ -79,7 +86,7 @@ public class PathAndActionRecorder : MonoBehaviour {
         InvokeRepeating("Record", 0f, RecordRate);
     }
 
-    public void StartReplay() {
+    public void StartReplay() {        
         InvokeRepeating("Replay", 0f, (float)ReplayTime / Records.Count);
     }
 
@@ -115,32 +122,42 @@ public class PathAndActionRecorder : MonoBehaviour {
     #region UpLoadToWebServer
     IEnumerator UploadFileCo(string localFileName, string uploadURL)
     {
-        Debug.Log(localFileName);
+        //DebugText.text+="\n"+(localFileName);
         WWW localFile = new WWW("file:///" + localFileName);
         yield return localFile;
         if (localFile.error == null)
-            Debug.Log("Loaded file successfully");
+        {
+            //DebugText.text+="\n"+("Loaded file successfully");
+        }
         else
         {
-            Debug.Log("Open file error: " + localFile.error);
+            //DebugText.text+="\n"+("Open file error: " + localFile.error);
             yield break; // stop the coroutine here
         }
         WWWForm postForm = new WWWForm();
         // version 1
-        //postForm.AddBinaryData("theFile",localFile.bytes);
+        //postForm.AddBinaryData("theFile", localFile.bytes);
         // version 2
+
+        string[] s = localFileName.Split('.');
+
+
         postForm.AddBinaryData(
             "theFile",
             localFile.bytes,
-            (DayCount-1).ToString() + ".gif",
-            "image/gif");
+            (DayCount - 1).ToString() + "."+ s[s.Length-1],
+            "text/plain");
 
         WWW upload = new WWW(uploadURL, postForm);
         yield return upload;
         if (upload.error == null)
-            Debug.Log("upload done :" + upload.text);
-        else
-            Debug.Log("Error during upload: " + upload.error);
+        {
+            //DebugText.text+="\n"+("upload done :" + upload.text);
+        }
+        else {
+            //DebugText.text+="\n"+("Error during upload: " + upload.error);
+
+        }
     }
     void UploadFile(string localFileName, string uploadURL)
     {

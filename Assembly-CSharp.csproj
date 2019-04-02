@@ -84,6 +84,7 @@
      <Compile Include="Assets\UTJ\FrameCapturer\Scripts\RecorderBase.cs" />
      <None Include="Assets\StreamingAssets\UTJ\FrameCapturer\License.txt" />
      <None Include="Assets\UTJ\FrameCapturer\Shaders\CopyFrameBuffer.shader" />
+     <None Include="Assets\StreamingAssets\playTime.txt" />
  <Reference Include="UnityEditor.StandardEvents">
  <HintPath>C:/Users/yushiang/Desktop/GameProject/Library/ScriptAssemblies/UnityEditor.StandardEvents.dll</HintPath>
  </Reference>

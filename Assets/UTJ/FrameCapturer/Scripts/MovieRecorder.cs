@@ -119,7 +119,7 @@ namespace UTJ.FrameCapturer
                 {
                     targetFramerate = m_targetFramerate;
                 }
-                string outPath = Application.streamingAssetsPath +'/' + PathAndActionRecorder.DayCount.ToString();
+                string outPath = PathAndActionRecorder.RecordPath + '/' + PathAndActionRecorder.DayCount.ToString();
 
                 m_encoderConfigs.captureVideo = m_captureVideo;
                 m_encoderConfigs.captureAudio = m_captureAudio;
@@ -180,11 +180,67 @@ namespace UTJ.FrameCapturer
             }
 
             if (m_recording)
-            {              
+            {
+                UploadFile(
+                PathAndActionRecorder.RecordPath + "/" +
+                PathAndActionRecorder.DayCount + ".gif",
+                PathAndActionRecorder.uploadUrl);
+                UploadFile(
+                      PathAndActionRecorder.RecordPath + "/" +
+                      PathAndActionRecorder.DayCount + ".json",
+                      PathAndActionRecorder.uploadUrl);
                 Debug.Log("MovieRecorder: EndRecording()");
             }
             base.EndRecording();
         }
+
+        #region UpLoadToWebServer
+        IEnumerator UploadFileCo(string localFileName, string uploadURL)
+        {
+            WWW localFile = new WWW("file:///" + localFileName);
+            yield return localFile;
+            if (localFile.error == null)
+            {
+                Debug.Log ("Loaded file successfully");
+            }
+            else
+            {
+                Debug.Log ("Open file error: " + localFile.error);
+                yield break; // stop the coroutine here
+            }
+            WWWForm postForm = new WWWForm();
+            // version 1
+            //postForm.AddBinaryData("theFile", localFile.bytes);
+            // version 2
+
+            string[] s = localFileName.Split('.');
+
+            postForm.AddBinaryData(
+                "theFile",
+                localFile.bytes,
+                (PathAndActionRecorder.DayCount).ToString() + "." + s[s.Length - 1],
+                "text/plain");
+
+            WWW upload = new WWW(uploadURL, postForm);
+            yield return upload;
+            if (upload.error == null)
+            {
+                Debug.Log ("upload done :" + upload.text);
+            }
+            else
+            {
+                Debug.Log ("Error during upload: " + upload.error);
+
+            }
+        }
+        void UploadFile(string localFileName, string uploadURL)
+        {
+            Debug.Log(localFileName);
+            Debug.Log(uploadURL);
+
+            StartCoroutine(UploadFileCo(localFileName, uploadURL));
+        }
+        #endregion
 
         #region impl
 #if UNITY_EDITOR

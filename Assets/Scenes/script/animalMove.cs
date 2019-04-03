@@ -2,7 +2,8 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class animalMove : MonoBehaviour {
+public class animalMove : MonoBehaviour
+{
 
     public float speed;             //Floating point variable to store the player's movement speed.
 
@@ -11,72 +12,170 @@ public class animalMove : MonoBehaviour {
     float moveHorizontal = 0;
     float moveVertical = 0;
 
+    [SerializeField]
+    private Vector3 dst = new Vector3(0, 0, 0);
+
+    private bool isAutoMoving = false;
+    private string Animation;
+
     void Start()
     {
         //Get and store a reference to the Rigidbody2D component so that we can access it.
         rb2d = GetComponent<Rigidbody2D>();
+        dst = transform.position;      
+
+    }
+
+    public void MovieToGameObject(GameObject target,string anim) {
+
+        if (isAutoMoving) return;
+
+        dst.x = target.transform.position.x;
+        dst.y = target.transform.position.y;
+        isAutoMoving = true;
+        Animation = anim;
     }
 
     //FixedUpdate is called at a fixed interval and is independent of frame rate. Put physics code here.
     void FixedUpdate()
-    {
+    {   
         if (GetComponent<animationNormal>().RemainLockPlayTime != 0)
         {
             rb2d.velocity = Vector2.zero;
             return;
         }
 
-        if (Input.GetKey(KeyCode.D))
+        if (isAutoMoving)
         {
-            moveHorizontal = 1;
-            moveVertical = 0;
-            GetComponent<animationNormal>().setAnimationEnableByName("nodright", true);
-            GetComponent<animationNormal>().setAnimationEnableByName("nodleft", false);
-            GetComponent<animationNormal>().setAnimationEnableByName("nodback", false);
-            GetComponent<animationNormal>().setAnimationEnableByName("nodfront", false);
+            rb2d.velocity = Vector2.zero;
+            if (GetComponent<animationNormal>().RemainLockPlayTime != 0) return;
+            var step = 0.05f;
+            if (dst.x > transform.position.x)
+            {
+                
+                transform.position += new Vector3(step, 0, 0);
+                if (dst.x - transform.position.x < step)
+                    transform.position = new Vector3(dst.x, transform.position.y);
+                else
+                    GetComponent<animationNormal>().ForceAnimation("walkRight");
+
+                GetComponent<animationNormal>().setAnimationEnableByName("nodright", true);
+                GetComponent<animationNormal>().setAnimationEnableByName("nodleft", false);
+                GetComponent<animationNormal>().setAnimationEnableByName("nodback", false);
+                GetComponent<animationNormal>().setAnimationEnableByName("nodfront", false);
+
+            }
+            else if (dst.x < transform.position.x)
+            {
+               
+                transform.position -= new Vector3(step, 0, 0);
+                if (transform.position.x- dst.x < step)
+                    transform.position = new Vector3(dst.x, transform.position.y);
+                else
+                    GetComponent<animationNormal>().ForceAnimation("walkleft");
+
+                GetComponent<animationNormal>().setAnimationEnableByName("nodleft", true);
+                GetComponent<animationNormal>().setAnimationEnableByName("nodright", false);
+                GetComponent<animationNormal>().setAnimationEnableByName("nodback", false);
+                GetComponent<animationNormal>().setAnimationEnableByName("nodfront", false);
+
+
+            }
+            else if (dst.y > transform.position.y)
+            {
+                
+                transform.position += new Vector3(0, step, 0);
+                if (dst.y-transform.position.y < step)
+                    transform.position = new Vector3(transform.position.x, dst.y);
+                else
+                    GetComponent<animationNormal>().ForceAnimation("walkback");
+
+                GetComponent<animationNormal>().setAnimationEnableByName("nodback", true);
+                GetComponent<animationNormal>().setAnimationEnableByName("nodright", false);
+                GetComponent<animationNormal>().setAnimationEnableByName("nodleft", false);
+                GetComponent<animationNormal>().setAnimationEnableByName("nodfront", false);
+            }
+            else if (dst.y < transform.position.y)
+            {
+                
+                transform.position -= new Vector3(0, step, 0);
+                if (transform.position.y- dst.y < step)
+                    transform.position = new Vector3(transform.position.x, dst.y);
+                else
+                    GetComponent<animationNormal>().ForceAnimation("walkfront");
+
+                GetComponent<animationNormal>().setAnimationEnableByName("nodfront", true);
+                GetComponent<animationNormal>().setAnimationEnableByName("nodright", false);
+                GetComponent<animationNormal>().setAnimationEnableByName("nodleft", false);
+                GetComponent<animationNormal>().setAnimationEnableByName("nodback", false);
+
+            }
+            else
+            {
+                GetComponent<animationNormal>().ForceAnimation(Animation);
+                isAutoMoving = false;
+            }
         }
-        else if (Input.GetKey(KeyCode.A)) {
-            moveHorizontal = -1;
-            moveVertical = 0;
-            GetComponent<animationNormal>().setAnimationEnableByName("nodleft", true);
-            GetComponent<animationNormal>().setAnimationEnableByName("nodright", false);
-            GetComponent<animationNormal>().setAnimationEnableByName("nodback", false);
-            GetComponent<animationNormal>().setAnimationEnableByName("nodfront", false);
-        }
-        else if (Input.GetKey(KeyCode.W))
-        {
-            moveHorizontal = 0;
-            moveVertical = 1;
-            GetComponent<animationNormal>().setAnimationEnableByName("nodback", true);
-            GetComponent<animationNormal>().setAnimationEnableByName("nodright", false);
-            GetComponent<animationNormal>().setAnimationEnableByName("nodleft", false);
-            GetComponent<animationNormal>().setAnimationEnableByName("nodfront", false);
-        }
-        else if (Input.GetKey(KeyCode.S))
-        {
-            moveHorizontal = 0;
-            moveVertical = -1;
-            GetComponent<animationNormal>().setAnimationEnableByName("nodfront", true);
-            GetComponent<animationNormal>().setAnimationEnableByName("nodright", false);
-            GetComponent<animationNormal>().setAnimationEnableByName("nodleft", false);
-            GetComponent<animationNormal>().setAnimationEnableByName("nodback", false);
-        }
-        else
-        {
-            if (!Input.anyKey)
+        else {
+            if (Input.GetKey(KeyCode.D))
+            {
+                moveHorizontal = 1;
+                moveVertical = 0;
+                GetComponent<animationNormal>().setAnimationEnableByName("nodright", true);
+                GetComponent<animationNormal>().setAnimationEnableByName("nodleft", false);
+                GetComponent<animationNormal>().setAnimationEnableByName("nodback", false);
+                GetComponent<animationNormal>().setAnimationEnableByName("nodfront", false);
+            }
+            else if (Input.GetKey(KeyCode.A))
+            {
+                moveHorizontal = -1;
+                moveVertical = 0;
+                GetComponent<animationNormal>().setAnimationEnableByName("nodleft", true);
+                GetComponent<animationNormal>().setAnimationEnableByName("nodright", false);
+                GetComponent<animationNormal>().setAnimationEnableByName("nodback", false);
+                GetComponent<animationNormal>().setAnimationEnableByName("nodfront", false);
+            }
+            else if (Input.GetKey(KeyCode.W) )
             {
                 moveHorizontal = 0;
-                moveVertical = 0;
+                moveVertical = 1;
+                GetComponent<animationNormal>().setAnimationEnableByName("nodback", true);
+                GetComponent<animationNormal>().setAnimationEnableByName("nodright", false);
+                GetComponent<animationNormal>().setAnimationEnableByName("nodleft", false);
+                GetComponent<animationNormal>().setAnimationEnableByName("nodfront", false);
             }
-        }        
+            else if (Input.GetKey(KeyCode.S) )
+            {
+                moveHorizontal = 0;
+                moveVertical = -1;
+                GetComponent<animationNormal>().setAnimationEnableByName("nodfront", true);
+                GetComponent<animationNormal>().setAnimationEnableByName("nodright", false);
+                GetComponent<animationNormal>().setAnimationEnableByName("nodleft", false);
+                GetComponent<animationNormal>().setAnimationEnableByName("nodback", false);
+            }
+            else
+            {
+                if (!Input.anyKey)
+                {
+                    moveHorizontal = 0;
+                    moveVertical = 0;
+                }
+            }
 
-        //Use the two store floats to create a new Vector2 variable movement.
-        Vector2 movement = new Vector2(moveHorizontal, moveVertical);
-     
-        //Call the AddForce function of our Rigidbody2D rb2d supplying movement multiplied by speed to move our player.
-        rb2d.velocity=movement * speed*Time.deltaTime;
+            //Use the two store floats to create a new Vector2 variable movement.
+            Vector2 movement = new Vector2(moveHorizontal, moveVertical);
 
+            //Call the AddForce function of our Rigidbody2D rb2d supplying movement multiplied by speed to move our player.
+            rb2d.velocity = movement * speed * Time.deltaTime;
+        }
+    }  
+
+    void OnTriggerStay2D(Collider2D c) {
+
+        if (c.gameObject.GetComponent<hintWords>() != null) {
+            if(Input.GetKey(KeyCode.Z))
+            MovieToGameObject(c.gameObject, c.gameObject.GetComponent<hintWords>().activeName);
+        }
     }
-    
 
 }

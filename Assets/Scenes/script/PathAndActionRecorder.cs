@@ -13,7 +13,12 @@ public class PathAndActionRecorder : MonoBehaviour {
     public GameObject RecordObj;
     public GameObject ReplayObj;
     private int replayIndex = 0;
+
     public static int DayCount=0;
+    public static string RecordPath;
+    public static int playTime;
+    public static string uploadUrl;
+
     public List<Vector3> Path=new List<Vector3>();
     public Text DebugText;
     public MonoBehaviour Recorder;
@@ -22,19 +27,20 @@ public class PathAndActionRecorder : MonoBehaviour {
         Path.Clear();
         DirectoryInfo directoryInfo = new DirectoryInfo(Application.streamingAssetsPath);
         FileInfo[] allFiles = directoryInfo.GetFiles("*.json");
-        DayCount = allFiles.Length + 1;
+        FileInfo[] configFile = directoryInfo.GetFiles("config.txt");
 
-        //DebugText.text+="\n"+(Application.streamingAssetsPath);
-        if (allFiles.Length > 0) {
-            UploadFile(
-                  Application.streamingAssetsPath + "/" +
-                  allFiles.Length.ToString() + ".gif",
-                  "http://140.118.127.121/game/");
-            UploadFile(
-                  Application.streamingAssetsPath + "/" +
-                  allFiles.Length.ToString() + ".json",
-                  "http://140.118.127.121/game/");
-        }        
+        StreamReader strReader = configFile[0].OpenText();
+        playTime = int.Parse(strReader.ReadLine());
+        uploadUrl = strReader.ReadLine().Replace('\\', '/');
+
+        RecordPath = Application.streamingAssetsPath;
+        //RecordPath = strReader.ReadLine().Replace('\\','/');
+        //DebugText.text=(RecordPath);
+
+
+
+        DayCount = allFiles.Length + 1;
+       
 
     }
 
@@ -117,53 +123,7 @@ public class PathAndActionRecorder : MonoBehaviour {
             Records.Add(JsonUtility.FromJson<status>(s));
         }
 
-    }
-
-    #region UpLoadToWebServer
-    IEnumerator UploadFileCo(string localFileName, string uploadURL)
-    {
-        //DebugText.text+="\n"+(localFileName);
-        WWW localFile = new WWW("file:///" + localFileName);
-        yield return localFile;
-        if (localFile.error == null)
-        {
-            //DebugText.text+="\n"+("Loaded file successfully");
-        }
-        else
-        {
-            //DebugText.text+="\n"+("Open file error: " + localFile.error);
-            yield break; // stop the coroutine here
-        }
-        WWWForm postForm = new WWWForm();
-        // version 1
-        //postForm.AddBinaryData("theFile", localFile.bytes);
-        // version 2
-
-        string[] s = localFileName.Split('.');
-
-
-        postForm.AddBinaryData(
-            "theFile",
-            localFile.bytes,
-            (DayCount - 1).ToString() + "."+ s[s.Length-1],
-            "text/plain");
-
-        WWW upload = new WWW(uploadURL, postForm);
-        yield return upload;
-        if (upload.error == null)
-        {
-            //DebugText.text+="\n"+("upload done :" + upload.text);
-        }
-        else {
-            //DebugText.text+="\n"+("Error during upload: " + upload.error);
-
-        }
-    }
-    void UploadFile(string localFileName, string uploadURL)
-    {
-        StartCoroutine(UploadFileCo(localFileName, uploadURL));
-    }
-    #endregion
+    }   
 
 
 

@@ -14,11 +14,10 @@ public class StageManager : MonoBehaviour {
 	// Use this for initialization
 	void Start () {
 
-        DirectoryInfo directoryInfo = new DirectoryInfo(Application.streamingAssetsPath);
-        FileInfo[] allFiles = directoryInfo.GetFiles("playTime.txt");
-        int playtime = int.Parse(allFiles[0].OpenText().ReadLine());
-        stages[2].GetComponent<timer>().TotalTime = playtime;
+        stages[2].GetComponent<timer>().TotalTime = PathAndActionRecorder.playTime;
+        Debug.Log(PathAndActionRecorder.playTime);
         setStage(currentStage);
+
     }
 
     public void Next()

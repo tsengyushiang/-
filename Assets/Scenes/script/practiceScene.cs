@@ -15,8 +15,7 @@ public class practiceScene : MonoBehaviour {
     }
 
     public void animateOver() {
-        startMenu.SetActive(false);
-       
+        startMenu.SetActive(false);       
     }
 
     public void ableToGo() {
@@ -32,16 +31,13 @@ public class practiceScene : MonoBehaviour {
         {
             isActive = false;
             transform.GetChild(1).gameObject.SetActive(false);
-            StartCoroutine(Example());
+            GetComponent<Animator>().Play("practice");
         }
 
     } 
 
-    IEnumerator Example()
-    {
-        GetComponent<Animator>().Play("practice");
-        yield return new WaitForSeconds(12);
+    public void goPlay() {
         stage.Next();
-
     }
+
 }

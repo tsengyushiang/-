@@ -10,7 +10,7 @@ public class timer : MonoBehaviour {
     public StageManager stage;
     public int TotalTime = 60;
     private int currentTime = 0;
-    public GameObject foodPot;
+    public GameObject character;
 
 
     void TimerCountDown()
@@ -37,6 +37,11 @@ public class timer : MonoBehaviour {
 
         }
         */
+
+        if (currentTime >= TotalTime-2) {
+            character.GetComponent<animationNormal>().endScene();
+            character.GetComponent<animalMove>().speed = 0;
+        }
     }
 
     void Awake() {

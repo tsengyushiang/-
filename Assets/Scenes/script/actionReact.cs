@@ -8,10 +8,6 @@ public class actionReact : MonoBehaviour {
     public Text sentenceText;
     public Text htintText;
 
-    void Awake() {
-        setSentence("無聊的時候可以點點頭，世界就會上下移動", "按Q點頭");
-    }
-
     void setSentence(string left,string right) {
 
         int count = 0;
@@ -33,7 +29,6 @@ public class actionReact : MonoBehaviour {
 
         if (tmp != null)
         {
-            setSentence(tmp.sentence, tmp.hint);
             transform.parent.GetComponent<animationNormal>().setAnimationEnableByName(tmp.activeName, true);
         }
     }
@@ -43,11 +38,8 @@ public class actionReact : MonoBehaviour {
         hintWords tmp = collision.gameObject.GetComponent<hintWords>();
         if (tmp != null)
         {
-            setSentence("", "");
             transform.parent.GetComponent<animationNormal>().setAnimationEnableByName(tmp.activeName, false);
         }
-    }
-
-
+    }  
 
 }

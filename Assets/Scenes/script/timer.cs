@@ -12,6 +12,9 @@ public class timer : MonoBehaviour {
     private int currentTime = 0;
     public GameObject character;
 
+   public void lockPlay() {
+        character.GetComponent<animalMove>().enabled = false;
+    }
 
     void TimerCountDown()
     {

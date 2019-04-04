@@ -12,6 +12,8 @@ public class practiceScene : MonoBehaviour {
     public void ShowFirst() {
         startMenu.SetActive(true);
         startMenu.GetComponent<StartMenuContorl>().enabled = false;
+        character.GetComponent<animalMove>().enabled = false;
+        character.GetComponent<animationNormal>().enabled = false;
         isActive = false;
     }
 
@@ -20,7 +22,9 @@ public class practiceScene : MonoBehaviour {
     }
 
     public void ableToGo() {
-        character.transform.position = new Vector3(-0.65f, -0.37f, 0f);
+        character.GetComponent<animalMove>().enabled = true;
+        character.GetComponent<animationNormal>().enabled = true;
+
         isActive = true;
     }
 

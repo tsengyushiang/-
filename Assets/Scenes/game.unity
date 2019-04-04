@@ -2181,7 +2181,7 @@ AudioSource:
   SpatializePostEffects: 0
   Priority: 128
   DopplerLevel: 1
-  MinDistance: 1
+  MinDistance: 1.8387785
   MaxDistance: 500
   Pan2D: 0
   rolloffMode: 0
@@ -3656,6 +3656,7 @@ GameObject:
   - component: {fileID: 571834708}
   - component: {fileID: 571834707}
   - component: {fileID: 571834706}
+  - component: {fileID: 571834711}
   m_Layer: 0
   m_Name: character
   m_TagString: Untagged
@@ -3800,6 +3801,7 @@ MonoBehaviour:
     - {fileID: 21300000, guid: dab8574620f698a498c0576adb40bebf, type: 3}
     - {fileID: 21300000, guid: 485fa0fadeae3904b93024b11b981561, type: 3}
     - {fileID: 21300000, guid: 29ccc45739920c440881b76cb453e9c5, type: 3}
+    sound: {fileID: 8300000, guid: e7d935f67781b0447b8f44ac318f13b5, type: 3}
   - Name: walkback
     key: 119
     enable: 1
@@ -3819,6 +3821,7 @@ MonoBehaviour:
     - {fileID: 21300000, guid: 97fccc67920448244867880cb558d8c8, type: 3}
     - {fileID: 21300000, guid: 230861c57e873fc458e8ab32a8b7c3ab, type: 3}
     - {fileID: 21300000, guid: 20324407a7f80ec4d85557362b010e19, type: 3}
+    sound: {fileID: 8300000, guid: e7d935f67781b0447b8f44ac318f13b5, type: 3}
   - Name: walkleft
     key: 97
     enable: 1
@@ -3838,6 +3841,7 @@ MonoBehaviour:
     - {fileID: 21300000, guid: fa8b406a69505cd4faa9b3ec5fc657f4, type: 3}
     - {fileID: 21300000, guid: 898a0fa29d7006b4d9e3df789ad659f5, type: 3}
     - {fileID: 21300000, guid: 3d2ec5ae544e8434aa1fd8c3d794cf33, type: 3}
+    sound: {fileID: 8300000, guid: e7d935f67781b0447b8f44ac318f13b5, type: 3}
   - Name: walkfront
     key: 115
     enable: 1
@@ -3857,6 +3861,7 @@ MonoBehaviour:
     - {fileID: 21300000, guid: 40347315884361047b175471e6911474, type: 3}
     - {fileID: 21300000, guid: dcf9421c47b687141924c5390d7542dd, type: 3}
     - {fileID: 21300000, guid: acaffee7cffa7434b967156179059758, type: 3}
+    sound: {fileID: 8300000, guid: e7d935f67781b0447b8f44ac318f13b5, type: 3}
   throwUpHint: {fileID: 0}
   currentMotion: 0
   RemainLockPlayTime: 0
@@ -3909,6 +3914,101 @@ SpriteRenderer:
   m_SpriteTileMode: 0
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
+--- !u!82 &571834711
+AudioSource:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 571834704}
+  m_Enabled: 1
+  serializedVersion: 4
+  OutputAudioMixerGroup: {fileID: 0}
+  m_audioClip: {fileID: 0}
+  m_PlayOnAwake: 0
+  m_Volume: 1
+  m_Pitch: 1
+  Loop: 0
+  Mute: 0
+  Spatialize: 0
+  SpatializePostEffects: 0
+  Priority: 128
+  DopplerLevel: 1
+  MinDistance: 1
+  MaxDistance: 500
+  Pan2D: 0
+  rolloffMode: 0
+  BypassEffects: 0
+  BypassListenerEffects: 0
+  BypassReverbZones: 0
+  rolloffCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    - serializedVersion: 3
+      time: 1
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  panLevelCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  spreadCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  reverbZoneMixCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
 --- !u!1 &572719121
 GameObject:
   m_ObjectHideFlags: 0
@@ -6620,6 +6720,7 @@ GameObject:
   - component: {fileID: 1159934418}
   - component: {fileID: 1159934420}
   - component: {fileID: 1159934421}
+  - component: {fileID: 1159934422}
   m_Layer: 9
   m_Name: character
   m_TagString: Untagged
@@ -6672,6 +6773,7 @@ MonoBehaviour:
     - {fileID: 21300000, guid: dab8574620f698a498c0576adb40bebf, type: 3}
     - {fileID: 21300000, guid: 485fa0fadeae3904b93024b11b981561, type: 3}
     - {fileID: 21300000, guid: 29ccc45739920c440881b76cb453e9c5, type: 3}
+    sound: {fileID: 8300000, guid: e7d935f67781b0447b8f44ac318f13b5, type: 3}
   - Name: walkback
     key: 119
     enable: 0
@@ -6691,6 +6793,7 @@ MonoBehaviour:
     - {fileID: 21300000, guid: 97fccc67920448244867880cb558d8c8, type: 3}
     - {fileID: 21300000, guid: 230861c57e873fc458e8ab32a8b7c3ab, type: 3}
     - {fileID: 21300000, guid: 20324407a7f80ec4d85557362b010e19, type: 3}
+    sound: {fileID: 8300000, guid: e7d935f67781b0447b8f44ac318f13b5, type: 3}
   - Name: walkleft
     key: 97
     enable: 0
@@ -6710,6 +6813,7 @@ MonoBehaviour:
     - {fileID: 21300000, guid: fa8b406a69505cd4faa9b3ec5fc657f4, type: 3}
     - {fileID: 21300000, guid: 898a0fa29d7006b4d9e3df789ad659f5, type: 3}
     - {fileID: 21300000, guid: 3d2ec5ae544e8434aa1fd8c3d794cf33, type: 3}
+    sound: {fileID: 8300000, guid: e7d935f67781b0447b8f44ac318f13b5, type: 3}
   - Name: walkfront
     key: 115
     enable: 0
@@ -6729,11 +6833,12 @@ MonoBehaviour:
     - {fileID: 21300000, guid: 40347315884361047b175471e6911474, type: 3}
     - {fileID: 21300000, guid: dcf9421c47b687141924c5390d7542dd, type: 3}
     - {fileID: 21300000, guid: acaffee7cffa7434b967156179059758, type: 3}
+    sound: {fileID: 8300000, guid: e7d935f67781b0447b8f44ac318f13b5, type: 3}
   - Name: throwup
     key: 120
     enable: 0
     lockwhenPlay: 1
-    speed: 4.5
+    speed: 15
     writeDefault: 0
     lockPlayTimes: 1
     normalMaps:
@@ -6793,6 +6898,7 @@ MonoBehaviour:
     - {fileID: 21300000, guid: e77cdc55b0624434ca36078e62a5c395, type: 3}
     - {fileID: 21300000, guid: 9f0eaf5abeb8cfb4482370a41c37f105, type: 3}
     - {fileID: 21300000, guid: 2efac550ef85e4745a7b5bca285b8c51, type: 3}
+    sound: {fileID: 8300000, guid: 6b8a6ea166bd2dc498659d022621db8a, type: 3}
   - Name: shackfront
     key: 101
     enable: 0
@@ -6827,6 +6933,7 @@ MonoBehaviour:
     - {fileID: 21300000, guid: 05e9f00e2db1e5046a08519e3f263cdd, type: 3}
     - {fileID: 21300000, guid: 9335c04c9670dac4f8872273b81413ba, type: 3}
     - {fileID: 21300000, guid: 86a8c7c024a19a2418333cf2f45867db, type: 3}
+    sound: {fileID: 0}
   - Name: shackback
     key: 101
     enable: 0
@@ -6861,6 +6968,7 @@ MonoBehaviour:
     - {fileID: 21300000, guid: fa8e73daeb4904647a94918e28fe4edd, type: 3}
     - {fileID: 21300000, guid: 9eed480b729fe144caf2b87e313a254d, type: 3}
     - {fileID: 21300000, guid: 1d4f383c6a7381e47b1a2e482d11b250, type: 3}
+    sound: {fileID: 0}
   - Name: nodright
     key: 113
     enable: 0
@@ -6877,6 +6985,7 @@ MonoBehaviour:
     Bleedingsprites:
     - {fileID: 21300000, guid: 1592aee01a9013047996c83505bf134d, type: 3}
     - {fileID: 21300000, guid: ebf48f3a806e0e346beb25ac4c0f4f11, type: 3}
+    sound: {fileID: 8300000, guid: aea355e437bce5948846f9762de65b2a, type: 3}
   - Name: nodleft
     key: 113
     enable: 0
@@ -6893,6 +7002,7 @@ MonoBehaviour:
     Bleedingsprites:
     - {fileID: 21300000, guid: aa6af01a537204041ae0551d7fe13bac, type: 3}
     - {fileID: 21300000, guid: ce092fd0e6789e84a88e679502d4fac4, type: 3}
+    sound: {fileID: 8300000, guid: aea355e437bce5948846f9762de65b2a, type: 3}
   - Name: nodfront
     key: 113
     enable: 0
@@ -6909,6 +7019,7 @@ MonoBehaviour:
     Bleedingsprites:
     - {fileID: 21300000, guid: 97c78c5946e38e941a1525c62ac62087, type: 3}
     - {fileID: 21300000, guid: be4c1842f1de61f488754362bfe82db6, type: 3}
+    sound: {fileID: 8300000, guid: aea355e437bce5948846f9762de65b2a, type: 3}
   - Name: nodback
     key: 113
     enable: 0
@@ -6925,6 +7036,7 @@ MonoBehaviour:
     Bleedingsprites:
     - {fileID: 21300000, guid: 942ca6a0a2d97d340aa56eb22eeb7980, type: 3}
     - {fileID: 21300000, guid: 11ad747ff9e1f9a48960cdfddb5f3fa0, type: 3}
+    sound: {fileID: 8300000, guid: aea355e437bce5948846f9762de65b2a, type: 3}
   - Name: lickleft
     key: 122
     enable: 0
@@ -6974,6 +7086,7 @@ MonoBehaviour:
     - {fileID: 21300000, guid: 503f2f8f6df8d264a873814035b2a276, type: 3}
     - {fileID: 21300000, guid: 749378340eac1b145b33f3411d401e70, type: 3}
     - {fileID: 21300000, guid: c22752d8c70589149a9b655e66665445, type: 3}
+    sound: {fileID: 0}
   - Name: eat
     key: 32
     enable: 0
@@ -7008,6 +7121,7 @@ MonoBehaviour:
     - {fileID: 21300000, guid: 2a92766955035d549ac8248dce603f35, type: 3}
     - {fileID: 21300000, guid: 4cf85b6bfa0e8de4c9bfed2b70ebd2ad, type: 3}
     - {fileID: 21300000, guid: 662174ce88d04bf43a6020635983b806, type: 3}
+    sound: {fileID: 8300000, guid: dfecb2c30f41f9b478fd401b4451b083, type: 3}
   - Name: drinkleft
     key: 32
     enable: 0
@@ -7054,6 +7168,7 @@ MonoBehaviour:
     - {fileID: 21300000, guid: 3a2c2c2d47787c64ea725e04de3f440f, type: 3}
     - {fileID: 21300000, guid: 7285130f8794dcb4482cc65cb8155082, type: 3}
     - {fileID: 21300000, guid: a482ae182e7f7774684b982bc562ae9b, type: 3}
+    sound: {fileID: 8300000, guid: dfecb2c30f41f9b478fd401b4451b083, type: 3}
   - Name: drinkback
     key: 32
     enable: 0
@@ -7070,6 +7185,7 @@ MonoBehaviour:
     Bleedingsprites:
     - {fileID: 21300000, guid: da958a42c33fc024180241c509ee7b4a, type: 3}
     - {fileID: 21300000, guid: e9a16b9c63dfbad4caa0894a79dd3ce3, type: 3}
+    sound: {fileID: 0}
   - Name: backichy
     key: 99
     enable: 0
@@ -7086,6 +7202,7 @@ MonoBehaviour:
     Bleedingsprites:
     - {fileID: 21300000, guid: ee6f3232cf0314e4d931a269dc5c3c88, type: 3}
     - {fileID: 21300000, guid: dd695ce3ee359ba41a185776d786f716, type: 3}
+    sound: {fileID: 8300000, guid: 44289ea2c8042b54c8f3b915774b58af, type: 3}
   - Name: lickright
     key: 122
     enable: 0
@@ -7135,6 +7252,7 @@ MonoBehaviour:
     - {fileID: 21300000, guid: e7ada027facf3274dbf6de0e2532d6dd, type: 3}
     - {fileID: 21300000, guid: c87aab2825a085241bf96a800198931f, type: 3}
     - {fileID: 21300000, guid: 5620e2fca48f947419cfd1eb78553437, type: 3}
+    sound: {fileID: 0}
   - Name: standup
     key: 32
     enable: 0
@@ -7157,6 +7275,7 @@ MonoBehaviour:
     - {fileID: 21300000, guid: aaa9f955dce9e574d9064710a256e015, type: 3}
     - {fileID: 21300000, guid: 3f99a408e606490499101504846829f9, type: 3}
     - {fileID: 21300000, guid: a8271aa69d2406545a2528b239b0bd04, type: 3}
+    sound: {fileID: 0}
   - Name: sitDown
     key: 48
     enable: 0
@@ -7179,6 +7298,7 @@ MonoBehaviour:
     - {fileID: 21300000, guid: 3f99a408e606490499101504846829f9, type: 3}
     - {fileID: 21300000, guid: aaa9f955dce9e574d9064710a256e015, type: 3}
     - {fileID: 21300000, guid: f673e66ed5643654a8250d44a3d8f76b, type: 3}
+    sound: {fileID: 0}
   throwUpHint: {fileID: 704351092}
   currentMotion: 0
   RemainLockPlayTime: 0
@@ -7323,6 +7443,101 @@ PolygonCollider2D:
       - {x: -0.21499999, y: -0.39999998}
       - {x: -0.21499999, y: -0.52}
       - {x: -0.195, y: -0.53999996}
+--- !u!82 &1159934422
+AudioSource:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1159934415}
+  m_Enabled: 1
+  serializedVersion: 4
+  OutputAudioMixerGroup: {fileID: 0}
+  m_audioClip: {fileID: 8300000, guid: e7d935f67781b0447b8f44ac318f13b5, type: 3}
+  m_PlayOnAwake: 0
+  m_Volume: 1
+  m_Pitch: 1
+  Loop: 0
+  Mute: 0
+  Spatialize: 0
+  SpatializePostEffects: 0
+  Priority: 128
+  DopplerLevel: 1
+  MinDistance: 11.455982
+  MaxDistance: 500
+  Pan2D: 0
+  rolloffMode: 0
+  BypassEffects: 0
+  BypassListenerEffects: 0
+  BypassReverbZones: 0
+  rolloffCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    - serializedVersion: 3
+      time: 1
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  panLevelCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  spreadCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  reverbZoneMixCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
 --- !u!1 &1200556545
 GameObject:
   m_ObjectHideFlags: 0
@@ -7653,7 +7868,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &1298069844
 Transform:
   m_ObjectHideFlags: 0

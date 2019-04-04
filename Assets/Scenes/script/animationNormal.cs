@@ -21,6 +21,7 @@ public class animationNormal : MonoBehaviour {
         public Texture2D[] normalMaps;
         public Sprite[] Normalsprites;
         public Sprite[] Bleedingsprites;
+        public AudioClip sound;
     };
 
     private animates NULL;
@@ -182,6 +183,18 @@ public class animationNormal : MonoBehaviour {
             gameObject.AddComponent<PolygonCollider2D>();
             
             GetComponent<PolygonCollider2D>().isTrigger = true;
+
+            if (currentMotion == 0.0f && Animations[currentState].sound != null) {
+
+                GetComponent<AudioSource>().clip = Animations[currentState].sound;
+
+                if (Animations[currentState].sound.name== "walk")
+                    GetComponent<AudioSource>().time = 0.43f;
+
+                if(GetComponent<AudioSource>().clip!=null)
+                    GetComponent<AudioSource>().Play();
+
+            }
 
             currentMotion += Animations[currentState].speed*Time.deltaTime;
             if ((int)currentMotion >= Animations[currentState].Normalsprites.Length)

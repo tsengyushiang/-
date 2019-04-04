@@ -39,7 +39,23 @@ public class animationNormal : MonoBehaviour {
 
     private int forceAnimate = -1;
 
-    private int backichyCount = 0; 
+    public int backichyCount = 0;
+    public int nodCount = 0;
+    public int throwupCount = 0;
+
+    public KeyCode getKeyCode(string name, bool enable)
+    {
+
+        for (int i = 0; i < Animations.Length; i++)
+        {
+            if (Animations[i].Name == name)
+            {              
+                return Animations[i].key;
+            }
+        }
+
+        return KeyCode.Z;
+    }
 
     public void setAnimationEnableByName(string name,bool enable) {
 
@@ -57,7 +73,6 @@ public class animationNormal : MonoBehaviour {
 
     public void endScene() {
         ForceAnimation("sitDown");
-        
     }
 
     public void ForceAnimation(string name) {
@@ -80,6 +95,7 @@ public class animationNormal : MonoBehaviour {
             forceAnimate = -1;
         }
         else {
+            if(index==17 || index==18)
             RemainLockPlayTime = 0;
             forceAnimate = index;
         }
@@ -114,21 +130,32 @@ public class animationNormal : MonoBehaviour {
                     {
                         RemainLockPlayTime = Animations[i].lockPlayTimes;
                     }
-                                      
 
-                        if (Animations[i].Name == "backichy")
+
+                    if (Animations[i].Name == "backichy")
+                    {
+                        backichyCount++;
+                        if (backichyCount > 5)
                         {
-                            backichyCount++;
-                            if (backichyCount > 5)
-                            {
-                                Isbleeding = true;
-                            }
+                            Isbleeding = true;
                         }
-                        else if (Animations[i].Name == "eat" || Animations[i].Name == "drinkleft")
-                        {
-                            throwUpHint.SetActive(true);
-                             setAnimationEnableByName("throwup", true);
-                        }
+                    }
+                    else if (Animations[i].Name == "eat" || Animations[i].Name == "drinkleft")
+                    {
+                        throwUpHint.SetActive(true);
+                        setAnimationEnableByName("throwup", true);
+                    }
+                    else if (Animations[i].Name == "throwup")
+                    {
+                        throwupCount++;
+                    }
+                    else if (Animations[i].Name == "nodleft" ||
+                        Animations[i].Name == "nodright" ||
+                        Animations[i].Name == "nodback" ||
+                        Animations[i].Name == "nodfront")
+                    {
+                        nodCount++;
+                    }
 
 
                     forceAnimate = -1;
@@ -171,7 +198,11 @@ public class animationNormal : MonoBehaviour {
 
                 RemainLockPlayTime--;
                 if (RemainLockPlayTime <= 0)
+                {
+                    CurrentAnimationName = "";
                     RemainLockPlayTime = 0;
+                    AnyBtnDown = false;
+                }
             }
         }
     }

@@ -185,10 +185,12 @@ namespace UTJ.FrameCapturer
                 PathAndActionRecorder.RecordPath + "/" +
                 PathAndActionRecorder.DayCount + ".gif",
                 PathAndActionRecorder.uploadUrl);
+                /*
                 UploadFile(
                       PathAndActionRecorder.RecordPath + "/" +
                       PathAndActionRecorder.DayCount + ".json",
                       PathAndActionRecorder.uploadUrl);
+                      */
                 Debug.Log("MovieRecorder: EndRecording()");
             }
             base.EndRecording();
@@ -201,11 +203,12 @@ namespace UTJ.FrameCapturer
             yield return localFile;
             if (localFile.error == null)
             {
-                Debug.Log ("Loaded file successfully");
+                PathAndActionRecorder.debug("Loaded file successfully");
             }
             else
             {
-                Debug.Log ("Open file error: " + localFile.error);
+                PathAndActionRecorder.debug("Open file error: " + localFile.error);
+                UploadFile(localFileName, uploadURL);
                 yield break; // stop the coroutine here
             }
             WWWForm postForm = new WWWForm();
@@ -225,18 +228,17 @@ namespace UTJ.FrameCapturer
             yield return upload;
             if (upload.error == null)
             {
-                Debug.Log ("upload done :" + upload.text);
+                PathAndActionRecorder.debug("upload done :" + upload.text);
             }
             else
             {
-                Debug.Log ("Error during upload: " + upload.error);
+                PathAndActionRecorder.debug("Error during upload: " + upload.error);
 
             }
         }
         void UploadFile(string localFileName, string uploadURL)
         {
-            Debug.Log(localFileName);
-            Debug.Log(uploadURL);
+            PathAndActionRecorder.debug(localFileName);
 
             StartCoroutine(UploadFileCo(localFileName, uploadURL));
         }

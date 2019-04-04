@@ -15,7 +15,6 @@ public class StageManager : MonoBehaviour {
 	void Start () {
 
         stages[2].GetComponent<timer>().TotalTime = PathAndActionRecorder.playTime;
-        Debug.Log(PathAndActionRecorder.playTime);
         setStage(currentStage);
 
     }
@@ -57,7 +56,6 @@ public class StageManager : MonoBehaviour {
         {
             recorder.Stop();
             recorder.save();
-            recorder.StartReplay();
         }
 
     }

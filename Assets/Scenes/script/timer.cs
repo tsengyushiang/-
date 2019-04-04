@@ -38,9 +38,12 @@ public class timer : MonoBehaviour {
         }
         */
 
-        if (currentTime >= TotalTime-2) {
+        if (currentTime == TotalTime - 3) {            
             character.GetComponent<animationNormal>().endScene();
-            character.GetComponent<animalMove>().speed = 0;
+        }
+        if (currentTime == TotalTime - 2)
+        {
+            GetComponent<Animator>().Play("keeper");
         }
     }
 

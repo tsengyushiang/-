@@ -20,9 +20,10 @@ public class PathAndActionRecorder : MonoBehaviour {
     public static string uploadUrl;
 
     public List<Vector3> Path=new List<Vector3>();
-    public Text DebugText;
+    public static Text DebugText;
     public MonoBehaviour Recorder;
     void Awake() {
+        DebugText = GameObject.Find("Canvas/Text").GetComponent<Text>();
 
         Path.Clear();
         DirectoryInfo directoryInfo = new DirectoryInfo(Application.streamingAssetsPath);
@@ -76,7 +77,7 @@ public class PathAndActionRecorder : MonoBehaviour {
 
         if (Path.ToArray().Length < Records.Count - 1)
         {
-            Path.Add(Records[replayIndex].pos + new Vector3(-0.73f, -0.59f, 0));
+            Path.Add(Records[replayIndex].pos);
             GetComponent<LineRenderer>().positionCount = Path.ToArray().Length;
             GetComponent<LineRenderer>().SetPositions(Path.ToArray());
         }         
@@ -96,7 +97,8 @@ public class PathAndActionRecorder : MonoBehaviour {
         InvokeRepeating("Replay", 0f, (float)ReplayTime / Records.Count);
     }
 
-    public void Stop() {        
+    public void Stop() {
+        GetComponent<LineRenderer>().positionCount = 0;
         CancelInvoke();
     }
    
@@ -123,8 +125,11 @@ public class PathAndActionRecorder : MonoBehaviour {
             Records.Add(JsonUtility.FromJson<status>(s));
         }
 
-    }   
+    }
 
+    public  static void debug(string s) {
+        //DebugText.text += (s) + "\n";
+    }
 
 
 }

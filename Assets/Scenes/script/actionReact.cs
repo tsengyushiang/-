@@ -7,6 +7,9 @@ public class actionReact : MonoBehaviour {
 
     public Text sentenceText;
     public Text htintText;
+    public GameObject hintDrinkLeft;
+    public GameObject hinkDrinkDown;
+    public GameObject hinkBackichy;
 
     void setSentence(string left,string right) {
 
@@ -23,23 +26,57 @@ public class actionReact : MonoBehaviour {
         htintText.text = right;
     }
 
-    void OnTriggerStay2D(Collider2D collision)
+    void OnTriggerExit2D(Collider2D collision)
     {
-        hintWords tmp = collision.gameObject.GetComponent<hintWords>();
+        if (collision.gameObject.name == "drinkleft")
+        {
+            hinkDrinkDown.SetActive(false);
+        }
+        else if (collision.gameObject.name == "drinkdown")
+        {
+            hintDrinkLeft.SetActive(false);
+        }
+        else  if (collision.gameObject.name == "wood")
+        {
+            hinkBackichy.SetActive(false);
+        }
 
+
+        hintWords tmp = collision.gameObject.GetComponent<hintWords>();
         if (tmp != null)
         {
-            transform.parent.GetComponent<animationNormal>().setAnimationEnableByName(tmp.activeName, true);
+            transform.parent.GetComponent<animalMove>().
+                    MovieToGameObject(transform.parent.gameObject,"", KeyCode.Alpha0);
         }
     }
 
-    void OnTriggerExit2D(Collider2D collision)
+    void OnTriggerEnter2D(Collider2D collision)
     {
+        if (collision.gameObject.name == "drinkleft")
+        {
+            hinkDrinkDown.SetActive(true);
+        }
+        else if (collision.gameObject.name == "drinkdown")
+        {
+            hintDrinkLeft.SetActive(true);
+        }
+        else if (collision.gameObject.name == "wood")
+        {
+            hinkBackichy.SetActive(true);
+        }
+
         hintWords tmp = collision.gameObject.GetComponent<hintWords>();
+
         if (tmp != null)
         {
-            transform.parent.GetComponent<animationNormal>().setAnimationEnableByName(tmp.activeName, false);
+            KeyCode key = transform.parent.GetComponent<animationNormal>().getKeyCode(tmp.activeName, true);
+
+            transform.parent.GetComponent<animalMove>().
+                MovieToGameObject(
+                collision.gameObject,
+                collision.gameObject.GetComponent<hintWords>().activeName, key);
         }
-    }  
+
+    }
 
 }

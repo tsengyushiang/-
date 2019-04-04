@@ -17,6 +17,7 @@ public class animalMove : MonoBehaviour
 
     private bool isAutoMoving = false;
     private string Animation;
+    private KeyCode waitKey;
 
     void Start()
     {
@@ -26,29 +27,36 @@ public class animalMove : MonoBehaviour
 
     }
 
-    public void MovieToGameObject(GameObject target,string anim) {
+    public void MovieToGameObject(GameObject target,string anim,KeyCode k) {
 
         if (isAutoMoving) return;
 
         dst.x = target.transform.position.x;
         dst.y = target.transform.position.y;
-        isAutoMoving = true;
         Animation = anim;
+        waitKey = k;
     }
 
     //FixedUpdate is called at a fixed interval and is independent of frame rate. Put physics code here.
     void FixedUpdate()
-    {   
+    {
+             
         if (GetComponent<animationNormal>().RemainLockPlayTime != 0)
         {
             rb2d.velocity = Vector2.zero;
             return;
         }
 
+        if (Input.GetKey(waitKey))
+        {
+            isAutoMoving = true;
+        }
+
         if (isAutoMoving)
         {
-            rb2d.velocity = Vector2.zero;
             if (GetComponent<animationNormal>().RemainLockPlayTime != 0) return;
+            rb2d.velocity = Vector2.zero;
+            
             var step = 0.05f;
             if (dst.x > transform.position.x)
             {
@@ -121,6 +129,7 @@ public class animalMove : MonoBehaviour
             {
                 moveHorizontal = 1;
                 moveVertical = 0;
+                GetComponent<animationNormal>().ForceAnimation("walkRight");
                 GetComponent<animationNormal>().setAnimationEnableByName("nodright", true);
                 GetComponent<animationNormal>().setAnimationEnableByName("nodleft", false);
                 GetComponent<animationNormal>().setAnimationEnableByName("nodback", false);
@@ -130,6 +139,8 @@ public class animalMove : MonoBehaviour
             {
                 moveHorizontal = -1;
                 moveVertical = 0;
+
+                GetComponent<animationNormal>().ForceAnimation("walkleft");
                 GetComponent<animationNormal>().setAnimationEnableByName("nodleft", true);
                 GetComponent<animationNormal>().setAnimationEnableByName("nodright", false);
                 GetComponent<animationNormal>().setAnimationEnableByName("nodback", false);
@@ -139,6 +150,7 @@ public class animalMove : MonoBehaviour
             {
                 moveHorizontal = 0;
                 moveVertical = 1;
+                GetComponent<animationNormal>().ForceAnimation("walkback");
                 GetComponent<animationNormal>().setAnimationEnableByName("nodback", true);
                 GetComponent<animationNormal>().setAnimationEnableByName("nodright", false);
                 GetComponent<animationNormal>().setAnimationEnableByName("nodleft", false);
@@ -148,6 +160,7 @@ public class animalMove : MonoBehaviour
             {
                 moveHorizontal = 0;
                 moveVertical = -1;
+                GetComponent<animationNormal>().ForceAnimation("walkfront");
                 GetComponent<animationNormal>().setAnimationEnableByName("nodfront", true);
                 GetComponent<animationNormal>().setAnimationEnableByName("nodright", false);
                 GetComponent<animationNormal>().setAnimationEnableByName("nodleft", false);
@@ -155,8 +168,8 @@ public class animalMove : MonoBehaviour
             }
             else
             {
-                if (!Input.anyKey)
-                {
+                if (!Input.GetKey(KeyCode.S) && !Input.GetKey(KeyCode.S)&& !Input.GetKey(KeyCode.S)&& !Input.GetKey(KeyCode.S))
+                {                  
                     moveHorizontal = 0;
                     moveVertical = 0;
                 }
@@ -168,14 +181,5 @@ public class animalMove : MonoBehaviour
             //Call the AddForce function of our Rigidbody2D rb2d supplying movement multiplied by speed to move our player.
             rb2d.velocity = movement * speed * Time.deltaTime;
         }
-    }  
-
-    void OnTriggerStay2D(Collider2D c) {
-
-        if (c.gameObject.GetComponent<hintWords>() != null) {
-            if(Input.GetKey(KeyCode.Z))
-            MovieToGameObject(c.gameObject, c.gameObject.GetComponent<hintWords>().activeName);
-        }
-    }
-
+    } 
 }

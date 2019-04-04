@@ -6,6 +6,7 @@ public class practiceScene : MonoBehaviour {
 
     public StageManager stage;
     public GameObject startMenu;
+    public GameObject character;
     private bool isActive=true;
 
     public void ShowFirst() {
@@ -19,6 +20,7 @@ public class practiceScene : MonoBehaviour {
     }
 
     public void ableToGo() {
+        character.transform.position = new Vector3(-0.65f, -0.37f, 0f);
         isActive = true;
     }
 

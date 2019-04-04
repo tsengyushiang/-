@@ -15,8 +15,10 @@ public class StartMenuContorl : MonoBehaviour {
 	// Use this for initialization
 	void Start () {
         Day.text = PathAndActionRecorder.DayCount.ToString();
-	}
-	
+        GetComponent<Animator>().Play("fadein");
+    }
+
+
     void selecBtn(int s)
     {
         for (int i = 0; i < buttons.Length; i++) {
@@ -42,7 +44,7 @@ public class StartMenuContorl : MonoBehaviour {
             if (currentSelect + 1 < buttons.Length)
             {
                 currentSelect++;
-                choseIcon.transform.position -= new Vector3(0, 0.4f, 0);
+                choseIcon.transform.position -= new Vector3(0, 0.42f, 0);
                 selecBtn(currentSelect);
             }
         }
@@ -51,11 +53,11 @@ public class StartMenuContorl : MonoBehaviour {
             if (currentSelect - 1 >= 0)
             {
                 currentSelect--;
-                choseIcon.transform.position += new Vector3(0, 0.4f, 0);
+                choseIcon.transform.position += new Vector3(0, 0.42f, 0);
                 selecBtn(currentSelect);
             }
         }
-        else if (Input.GetKeyDown(KeyCode.Return)) {
+        else if (Input.GetKeyDown(KeyCode.Q)) {
             buttons[currentSelect].onClick.Invoke();
         }
 

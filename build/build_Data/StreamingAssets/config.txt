@@ -1,2 +1,2 @@
-300
-http://140.118.127.121/game/
+10
+http://www.mochartdesign.com/project/Looptopia/A_Game_&_A_Gain/transfer.php

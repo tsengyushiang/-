@@ -12,6 +12,7 @@ public class PathAndActionRecorder : MonoBehaviour {
     public float ReplayTime = 10f;
     public GameObject RecordObj;
     public GameObject ReplayObj;
+    public LineRenderer lr;
     private int replayIndex = 0;
 
     public static int DayCount=0;
@@ -70,7 +71,7 @@ public class PathAndActionRecorder : MonoBehaviour {
 
     void Replay() {
 
-        if (replayIndex >= (Records.Count - 1)) replayIndex = 0;
+        if (replayIndex >= (Records.Count - 1)) return;
 
         ReplayObj.GetComponent<setSprite>().setAction(
             Records[replayIndex].pos, Records[replayIndex].currentAnimation, Records[replayIndex].index);
@@ -78,9 +79,9 @@ public class PathAndActionRecorder : MonoBehaviour {
         if (Path.ToArray().Length < Records.Count - 1)
         {
             Path.Add(Records[replayIndex].pos);
-            GetComponent<LineRenderer>().positionCount = Path.ToArray().Length;
-            GetComponent<LineRenderer>().SetPositions(Path.ToArray());
-        }         
+            lr.positionCount = Path.ToArray().Length;
+            lr.SetPositions(Path.ToArray());
+        }       
 
         replayIndex++;
 
@@ -98,7 +99,6 @@ public class PathAndActionRecorder : MonoBehaviour {
     }
 
     public void Stop() {
-        GetComponent<LineRenderer>().positionCount = 0;
         CancelInvoke();
     }
    
@@ -129,6 +129,7 @@ public class PathAndActionRecorder : MonoBehaviour {
 
     public  static void debug(string s) {
         //DebugText.text += (s) + "\n";
+        //Debug.Log(s);
     }
 
 

@@ -17,7 +17,7 @@ public class animalMove : MonoBehaviour
 
     private bool isAutoMoving = false;
     private string Animation;
-    private KeyCode waitKey;
+    public KeyCode waitKey;
 
     void Start()
     {

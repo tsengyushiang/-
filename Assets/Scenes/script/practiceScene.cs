@@ -22,6 +22,8 @@ public class practiceScene : MonoBehaviour {
     }
 
     public void ableToGo() {
+        startMenu.SetActive(false);
+
         character.GetComponent<animalMove>().enabled = true;
         character.GetComponent<animationNormal>().enabled = true;
 

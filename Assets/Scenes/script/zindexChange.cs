@@ -14,7 +14,7 @@ public class zindexChange : MonoBehaviour {
     {
         if (collision.gameObject.name == "characterCollider")
         {
-            transform.parent.GetComponent<SpriteRenderer>().sortingOrder = 3;
+            transform.parent.GetComponent<SpriteRenderer>().sortingOrder = 4;
             transform.parent.GetChild(0).GetComponent<BoxCollider2D>().enabled = true;
             transform.parent.GetChild(1).GetComponent<BoxCollider2D>().enabled = false;
         }

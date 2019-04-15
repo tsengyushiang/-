@@ -12,10 +12,6 @@ public class timer : MonoBehaviour {
     private int currentTime = 0;
     public GameObject character;
 
-   public void lockPlay() {
-        character.GetComponent<animalMove>().enabled = false;
-    }
-
     void TimerCountDown()
     {
         currentTime ++;       
@@ -41,11 +37,9 @@ public class timer : MonoBehaviour {
         }
         */
 
-        if (currentTime == TotalTime - 3) {            
-            character.GetComponent<animationNormal>().endScene();
-        }
-        if (currentTime == TotalTime - 2)
+        if (currentTime == TotalTime - 3)
         {
+            character.GetComponent<animationNormal>().GameOver();
             GetComponent<Animator>().Play("keeper");
         }
     }
@@ -54,7 +48,12 @@ public class timer : MonoBehaviour {
         timerSlider.value = 0;
     }
     // Start is called before the first frame update
-    public void OnEnable()
+
+    public void OnEnable() {
+        GameObject.Find("backgroundMusic").GetComponent<AudioSource>().enabled = true;
+
+    }
+    public void StartCount()
     {      
         currentTime = 0;
         InvokeRepeating("TimerCountDown", 1f, 1f);

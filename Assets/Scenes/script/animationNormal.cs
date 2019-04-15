@@ -27,6 +27,7 @@ public class animationNormal : MonoBehaviour {
     private animates NULL;
     public animates[] Animations;
     public GameObject throwUpHint;
+    public GameObject foodpot;
 
     // kind of animation
     private int currentState=0;
@@ -72,8 +73,12 @@ public class animationNormal : MonoBehaviour {
        ForceAnimation("standup");
     }
 
-    public void endScene() {
+    public void GameOver() {
+
+        Destroy(GetComponent<animalMove>());
+        GetComponent<Rigidbody2D>().velocity = Vector2.zero;
         ForceAnimation("sitDown");
+
     }
 
     public void ForceAnimation(string name) {
@@ -96,8 +101,13 @@ public class animationNormal : MonoBehaviour {
             forceAnimate = -1;
         }
         else {
-            if(index==17 || index==18)
-            RemainLockPlayTime = 0;
+            if (name == "sitDown")
+            {
+                RemainLockPlayTime = 1;
+                AnyBtnDown = true;
+                currentState = 18;
+                currentMotion = 0;
+            }
             forceAnimate = index;
         }
     }
@@ -143,8 +153,12 @@ public class animationNormal : MonoBehaviour {
                     }
                     else if (Animations[i].Name == "eat" || Animations[i].Name == "drinkleft")
                     {
+                        if(Animations[i].Name == "eat")
+                        foodpot.GetComponent<SpriteRenderer>().sortingOrder = 1;
                         throwUpHint.SetActive(true);
+                        Destroy(foodpot,1.0f);
                         setAnimationEnableByName("throwup", true);
+                        GetComponent<animalMove>().waitKey =KeyCode.K;
                     }
                     else if (Animations[i].Name == "throwup")
                     {
@@ -186,13 +200,10 @@ public class animationNormal : MonoBehaviour {
 
             if (currentMotion == 0.0f && Animations[currentState].sound != null) {
 
-                GetComponent<AudioSource>().clip = Animations[currentState].sound;
-
-                if (Animations[currentState].sound.name== "walk")
-                    GetComponent<AudioSource>().time = 0.43f;
-
-                if(GetComponent<AudioSource>().clip!=null)
-                    GetComponent<AudioSource>().Play();
+                if (Animations[currentState].sound != null)
+                {
+                    GetComponent<AudioSource>().PlayOneShot(Animations[currentState].sound, 0.5f);
+                }
 
             }
 
@@ -215,6 +226,8 @@ public class animationNormal : MonoBehaviour {
                     CurrentAnimationName = "";
                     RemainLockPlayTime = 0;
                     AnyBtnDown = false;
+
+                    if (currentState == 18) RemainLockPlayTime = 1;
                 }
             }
         }

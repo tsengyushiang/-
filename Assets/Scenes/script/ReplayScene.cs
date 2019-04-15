@@ -20,7 +20,7 @@ public class ReplayScene : MonoBehaviour {
     public bool startCountDay = false;
     public Text Day;
 
-    float step = 0.001f;
+    float step = 0.005f;
     float dayAnimate = 0;
 
     void VoiceDown() {
@@ -36,7 +36,7 @@ public class ReplayScene : MonoBehaviour {
         if (startCountDay) {
 
             dayAnimate += step;
-            step += 0.001f;
+            step += 0.005f;
             Day.text = ((int)dayAnimate) .ToString();
 
             if (((int)dayAnimate) == PathAndActionRecorder.DayCount)
@@ -86,20 +86,21 @@ public class ReplayScene : MonoBehaviour {
         showAnimation();
     }
 
-    void showGlobal() {        
+    void showGlobal() {
 
-        if (g_backcount != -1)
-        {
-            CountNumber.text = g_backcount.ToString();
-        }
-        else if (g_throwupCount != -1)
-        {
-            CountNumber.text = g_throwupCount.ToString();
-        }
-        else if (g_nodCount != -1)
+        if (g_nodCount != -1)
         {
             CountNumber.text = g_nodCount.ToString();
         }
+        else if(g_throwupCount != -1)
+        {
+            CountNumber.text = g_throwupCount.ToString();
+        }
+        else if (g_backcount != -1)
+        {
+            CountNumber.text = g_backcount.ToString();
+        }
+        
 
     }
 
@@ -128,7 +129,19 @@ public class ReplayScene : MonoBehaviour {
         int throwupCount = component.throwupCount;
         int nodCount = component.nodCount;
 
-        if (backcount >= throwupCount && backcount >= nodCount) {
+        if (nodCount >= backcount && nodCount >= throwupCount)
+        {
+            animation_throwup.SetActive(false);
+            animation_nod.SetActive(true);
+            animation_backichy.SetActive(false);
+            ActionName.text = "點頭";
+            CountNumber.text = nodCount.ToString();
+
+            g_nodCount += nodCount;
+            g_backcount = -1;
+            g_throwupCount = -1;
+        }
+        else if (backcount >= throwupCount && backcount >= nodCount) {
 
             animation_throwup.SetActive(false);
             animation_nod.SetActive(false);
@@ -152,18 +165,7 @@ public class ReplayScene : MonoBehaviour {
             g_backcount = -1;
             g_nodCount = -1;
         }
-        else if (nodCount >= backcount && nodCount >= throwupCount)
-        {
-            animation_throwup.SetActive(false);
-            animation_nod.SetActive(true);
-            animation_backichy.SetActive(false);
-            ActionName.text = "點頭";
-            CountNumber.text = nodCount.ToString();
-
-            g_nodCount += nodCount;
-            g_backcount = -1;
-            g_throwupCount = -1;      
-        }
+        
 
     }
 

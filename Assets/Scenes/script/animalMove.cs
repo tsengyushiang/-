@@ -12,8 +12,7 @@ public class animalMove : MonoBehaviour
     float moveHorizontal = 0;
     float moveVertical = 0;
 
-    [SerializeField]
-    private Vector3 dst = new Vector3(0, 0, 0);
+    public Vector3 dst;
 
     private bool isAutoMoving = false;
     private string Animation;

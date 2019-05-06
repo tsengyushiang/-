@@ -1,2 +1,2 @@
 10
-http://www.mochartdesign.com/project/Looptopia/A_Game_&_A_Gain/transfer.php
+https://www.mochartdesign.com/project/Looptopia/A_Game_&_A_Gain/transfers.php

@@ -16,12 +16,15 @@ public class ReplayScene : MonoBehaviour {
 
     public Text ActionName;
     public Text CountNumber;
+    public GameObject CounNumberUnit;
 
     public bool startCountDay = false;
     public Text Day;
+    public GameObject dayUnit;
 
     float step = 0.005f;
     float dayAnimate = 0;
+    float currentAddTime = 0;
 
     void VoiceDown() {
         GameObject.Find("backgroundMusic").gameObject.GetComponent<Animator>().Play("volumeDown");
@@ -35,12 +38,26 @@ public class ReplayScene : MonoBehaviour {
 
         if (startCountDay) {
 
-            dayAnimate += step;
-            step += 0.005f;
-            Day.text = ((int)dayAnimate) .ToString();
+            currentAddTime += Time.deltaTime;
 
-            if (((int)dayAnimate) == PathAndActionRecorder.DayCount)
-                startCountDay = false;
+            if (currentAddTime > 2.0)
+            {
+                step = (PathAndActionRecorder.DayCount - dayAnimate) / ((4.0f- currentAddTime)/ Time.deltaTime);
+            }
+            else if (currentAddTime < 2.0) {
+                step = (PathAndActionRecorder.DayCount - dayAnimate / 4)  / (2.0f/Time.deltaTime);
+            }
+
+            dayAnimate += step;
+            Day.text = ((int)dayAnimate) .ToString();
+            dayUnit.transform.localPosition = new Vector3(Day.text.Length * 40.0f, 0, 0);
+
+            if (((int)dayAnimate) >= PathAndActionRecorder.DayCount)
+            {
+                Day.text = ((int)PathAndActionRecorder.DayCount).ToString();
+                dayUnit.transform.localPosition = new Vector3(Day.text.Length * 40.0f, 0, 0);
+                startCountDay = false;                
+            }
         }
     }
 
@@ -91,16 +108,22 @@ public class ReplayScene : MonoBehaviour {
         if (g_nodCount != -1)
         {
             CountNumber.text = g_nodCount.ToString();
+            CounNumberUnit.transform.localPosition = new Vector3(g_nodCount.ToString().Length * 20f, 0, 0);
+            
         }
         else if(g_throwupCount != -1)
         {
             CountNumber.text = g_throwupCount.ToString();
+            CounNumberUnit.transform.localPosition = new Vector3(g_throwupCount.ToString().Length * 20f, 0, 0);
+
         }
         else if (g_backcount != -1)
         {
             CountNumber.text = g_backcount.ToString();
+            CounNumberUnit.transform.localPosition = new Vector3(g_backcount.ToString().Length * 20f, 0, 0);
+
         }
-        
+
 
     }
 
@@ -136,6 +159,8 @@ public class ReplayScene : MonoBehaviour {
             animation_backichy.SetActive(false);
             ActionName.text = "點頭";
             CountNumber.text = nodCount.ToString();
+            CounNumberUnit.transform.localPosition = new Vector3(nodCount.ToString().Length * 20f, 0, 0);
+
 
             g_nodCount += nodCount;
             g_backcount = -1;
@@ -148,6 +173,8 @@ public class ReplayScene : MonoBehaviour {
             animation_backichy.SetActive(true);
             ActionName.text = "搓背";
             CountNumber.text = backcount.ToString();
+            CounNumberUnit.transform.localPosition = new Vector3(backcount.ToString().Length * 20f, 0, 0);
+
 
             g_backcount += backcount;
             g_throwupCount = -1;
@@ -160,6 +187,8 @@ public class ReplayScene : MonoBehaviour {
             animation_backichy.SetActive(false);
             ActionName.text = "嘔吐";
             CountNumber.text = throwupCount.ToString();
+            CounNumberUnit.transform.localPosition = new Vector3(throwupCount.ToString().Length * 20f, 0, 0);
+
 
             g_throwupCount += throwupCount;
             g_backcount = -1;

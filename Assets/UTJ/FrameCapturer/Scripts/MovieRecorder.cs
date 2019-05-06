@@ -218,10 +218,20 @@ namespace UTJ.FrameCapturer
 
             string[] s = localFileName.Split('.');
 
+            string dayString = (PathAndActionRecorder.DayCount).ToString();
+
+            if (dayString.Length > 4)
+                dayString = dayString.Substring(0, 4);
+
+            while (dayString.Length < 4)
+                dayString = "0" + dayString;
+
+            dayString = "a-gain-" + dayString;
+
             postForm.AddBinaryData(
                 "theFile",
                 localFile.bytes,
-                (PathAndActionRecorder.DayCount).ToString() + "." + s[s.Length - 1],
+                 dayString + "." + s[s.Length - 1],
                 "text/plain");
 
             WWW upload = new WWW(uploadURL, postForm);

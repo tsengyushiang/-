@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using System.IO;  //StreamWrite會用到
+using UnityEngine.SceneManagement;
 
 using UnityEngine;
 
@@ -64,5 +65,8 @@ public class StageManager : MonoBehaviour {
         Application.Quit();
     }
 
+    public void Reload() {
+        SceneManager.LoadScene(0);
+    }
 
 }

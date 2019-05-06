@@ -10,12 +10,19 @@ public class StartMenuContorl : MonoBehaviour {
     public GameObject choseIcon;
     public Button[] buttons;
     public AudioClip clickSound;
+    public GameObject No;
+    public GameObject day;
 
     private int currentSelect = 0;
 
 	// Use this for initialization
 	void Start () {
         Day.text = PathAndActionRecorder.DayCount.ToString();
+
+        int addInterval = PathAndActionRecorder.DayCount.ToString().Length;
+        No.transform.position =No.transform.position - new Vector3(addInterval * 0.05f,0,0);
+        day.transform.position = day.transform.position + new Vector3(addInterval * 0.05f, 0, 0);
+
         GetComponent<Animator>().Play("fadein");
     }
 

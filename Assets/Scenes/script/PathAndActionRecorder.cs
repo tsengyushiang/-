@@ -40,10 +40,8 @@ public class PathAndActionRecorder : MonoBehaviour {
         //DebugText.text=(RecordPath);
 
 
-
         DayCount = allFiles.Length + 1;
-       
-
+        
     }
 
     [System.Serializable]

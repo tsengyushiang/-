@@ -85,7 +85,7 @@ f61c0793411f10cf5fbfa1473fef5ef2 UnityEngine.UI.dll:UnityEngine.UI.ToggleGroup
 86d36c43c53541d667100dc90b89cfba UnityEngine.UI.dll:UnityEngine.EventSystems.TouchInputModule
 1b8c02d0aa82fbf036a2b9b2d713eec3 UnityEngine.UI.dll:UnityEngine.UI.VerticalLayoutGroup
 0ba54c9772a594e7c1d570bdb0434ddd Assembly-CSharp.dll:.TextSpacing
-02a657ef6fa843682e9ccdf696fd3ee2 Assembly-CSharp.dll:.ReplayScene
+745448cbdbba9edac24daa6db0297d5f Assembly-CSharp.dll:.ReplayScene
 05524b8f659e7bfe5756d1335fec24ba Assembly-CSharp.dll:.zindexChange
 05524b8f659e7bfe5756d1335fec24ba UnityEngine.Timeline.dll:UnityEngine.Timeline.ActivationPlayableAsset
 cf455f7a806648c6ed4c7d3e3f8a0e03 UnityEngine.Timeline.dll:UnityEngine.Timeline.ActivationTrack
@@ -159,5 +159,5 @@ c2275a8bfbb9f9942cad75ecdfded41d UnityEngine.HoloLens.dll:UnityEngine.XR.WSA.Spa
 ad3c421c7662f47905fb3a3c46a0a6a7 Assembly-CSharp.dll:.animationNormal
 326bcc286b9decf520549838fe4c8859 Assembly-CSharp.dll:.actionReact
 51d6f6af4b02c6ce0dd0d8f3d4f8cbc0 Assembly-CSharp.dll:.setSprite
-9f90237096544a4751415e38af4d3f25 Assembly-CSharp.dll:.StartMenuContorl
+3f36e05d0cc6ba7d5ec1c589a9d8d94d Assembly-CSharp.dll:.StartMenuContorl
 edfcb8b923d5dec7caedd9bf505a8ed4 Assembly-CSharp.dll:.animalMove
